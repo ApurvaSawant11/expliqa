@@ -1,5 +1,5 @@
 import { Response } from "miragejs";
-import { requiresAuth } from "../utils/authUtils";
+import { requiresAuth, formatDate } from "../utils/authUtils";
 
 /**
  * All the routes related to user are present here.
