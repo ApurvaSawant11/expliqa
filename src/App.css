@@ -1,0 +1,17 @@
+.App{
+    background-color: #e9f0fa;
+}
+
+.main-container {
+    height: calc(100vh - 64px);
+}
+  
+.form-wrapper {
+    width: min(90vw, 480px);
+}
+
+.text-gradient{
+    background: linear-gradient(180deg, #08AEEA 0%, #2AF598 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
