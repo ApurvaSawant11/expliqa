@@ -8,6 +8,7 @@ import { Header, ThreadModal, RequiresAuth } from "components";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "features/userProfile/userSlice";
 import { getAllPosts, getUserPosts } from "features/home/postSlice";
+import { getAllQuestions, getUserQuestions } from "features/home/questionSlice";
 function App() {
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth);
@@ -17,6 +18,8 @@ function App() {
       dispatch(getAllUsers());
       dispatch(getAllPosts());
       dispatch(getUserPosts(user.username));
+      dispatch(getAllQuestions());
+      dispatch(getUserQuestions(user.username));
     }
   }, [token]);
 

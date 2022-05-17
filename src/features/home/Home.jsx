@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { openThreadModal } from "components/modal/threadModalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserPosts } from "./postSlice";
-import { FollowBar, PostCard } from "components";
+import { FollowBar, PostCard, QuestionCard } from "components";
 import { AnswerIcon, AskIcon, PostIcon } from "assets";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +11,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { allPosts } = useSelector((state) => state.post);
+  const { allQuestions } = useSelector((state) => state.question);
   const [feedPosts, setFeedPosts] = useState([]);
 
   useEffect(() => {
@@ -29,21 +30,21 @@ const Home = () => {
         <section className="bg-white p-2 pt-4 rounded-md mb-10">
           <div
             className="w-full bg-slate-100 rounded-2xl p-2 pl-3 text-gray-500"
-            onClick={() => dispatch(openThreadModal())}
+            onClick={() => dispatch(openThreadModal({ tabIndex: 1 }))}
           >
             Write something awesome...
           </div>
           <div className="flex justify-between gap-2 mt-4 ">
             <button
               className="basis-full flex items-center justify-center rounded-md py-1 hover:text-blue-600 hover:bg-slate-100 gap-2"
-              onClick={() => dispatch(openThreadModal())}
+              onClick={() => dispatch(openThreadModal({ tabIndex: 1 }))}
             >
               <PostIcon /> Post
             </button>
             <span className="border-x-2 basis-full px-2">
               <button
                 className="w-full flex items-center justify-center rounded-md py-1 hover:text-blue-600 hover:bg-slate-100 gap-2"
-                onClick={() => dispatch(openThreadModal())}
+                onClick={() => dispatch(openThreadModal({ tabIndex: 2 }))}
               >
                 <AskIcon /> Ask
               </button>

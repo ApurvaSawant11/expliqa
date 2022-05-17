@@ -11,11 +11,13 @@ const threadModalSlice = createSlice({
   reducers: {
     openThreadModal: (state, action) => {
       state.threadModal = true;
-      state.threadInfo = action?.payload;
+      state.threadInfo = action?.payload?.thread;
+      state.threadTabIndex = action?.payload?.tabIndex;
     },
     closeThreadModal: (state) => {
       state.threadModal = false;
       state.threadInfo = {};
+      state.threadTabIndex = 1;
     },
   },
 });
