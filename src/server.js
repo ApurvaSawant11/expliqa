@@ -12,6 +12,7 @@ import {
 import { Server, Model, RestSerializer } from "miragejs";
 import { users } from "./backend/db/users";
 import { questions } from "./backend/db/questions";
+import { posts } from "./backend/db/posts";
 import {
   getAllAnswersHandler,
   addAnswerHandler,
@@ -42,6 +43,14 @@ import {
   editQuestionHandler,
   deleteQuestionHandler,
 } from "./backend/controllers/QuestionController";
+import {
+  createPostHandler,
+  getAllpostsHandler,
+  getPostHandler,
+  deletePostHandler,
+  editPostHandler,
+  getAllUserPostsHandler,
+} from "./backend/controllers/PostController";
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
@@ -52,6 +61,7 @@ export function makeServer({ environment = "development" } = {}) {
     models: {
       user: Model,
       question: Model,
+      posts: Model,
     },
 
     // Runs on the start of the server
@@ -63,6 +73,10 @@ export function makeServer({ environment = "development" } = {}) {
 
       questions.forEach((item) => {
         server.create("question", { ...item });
+      });
+
+      posts.forEach((item) => {
+        server.create("post", { ...item });
       });
     },
 
@@ -97,6 +111,16 @@ export function makeServer({ environment = "development" } = {}) {
         "questions/delete/:questionId",
         deleteQuestionHandler.bind(this)
       );
+
+      // post routes (public)
+      this.get("/posts", getAllpostsHandler.bind(this));
+      this.get("/posts/:postId", getPostHandler.bind(this));
+      this.get("/posts/user/:username", getAllUserPostsHandler.bind(this));
+
+      // post routes (private)
+      this.post("/posts", createPostHandler.bind(this));
+      this.delete("/posts/:postId", deletePostHandler.bind(this));
+      this.post("/posts/edit/:postId", editPostHandler.bind(this));
 
       // answers routes (public)
       this.get("/answers/:questionId", getAllAnswersHandler.bind(this));
