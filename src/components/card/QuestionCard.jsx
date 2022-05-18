@@ -3,19 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { openThreadModal } from "components/modal/threadModalSlice";
 import { DeleteIcon, MoreIcon, PostIcon } from "assets";
-import { deletePost } from "features/home/postSlice";
+import { deleteQuestion } from "features/home/questionSlice";
 
-const PostCard = ({ post }) => {
+const QuestionCard = ({ question }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showDropDown, setShowDropDown] = useState(false);
   const { allUsers } = useSelector((state) => state.user);
   const { user: currentUser } = useSelector((state) => state.auth);
   const userDetails =
-    allUsers && allUsers?.find((user) => user.username === post.username);
+    allUsers && allUsers?.find((user) => user.username === question.username);
 
   const editHandler = () =>
-    dispatch(openThreadModal({ thread: post, tabIndex: 1 }));
+    dispatch(openThreadModal({ thread: question, tabIndex: 2 }));
 
   return userDetails ? (
     <article className="mt-4 p-4 bg-white flex flex-col rounded-md">
@@ -37,7 +37,7 @@ const PostCard = ({ post }) => {
             <div className="text-gray-400">{userDetails?.bio}</div>
           </div>
 
-          {currentUser.username === post.username && (
+          {currentUser.username === question.username && (
             <div
               className="px-3 py-0.5 cursor-pointer relative rounded-full"
               onClick={() => setShowDropDown(!showDropDown)}
@@ -54,7 +54,7 @@ const PostCard = ({ post }) => {
                   </li>
                   <li
                     className="py-1 px-3 flex gap-2 items-center hover:bg-slate-100 rounded-md"
-                    onClick={() => dispatch(deletePost(post._id))}
+                    onClick={() => dispatch(deleteQuestion(question._id))}
                   >
                     <DeleteIcon />
                     Delete
@@ -68,13 +68,13 @@ const PostCard = ({ post }) => {
 
       <section
         className="cursor-pointer"
-        onClick={() => navigate(`/post/${post._id}`)}
+        onClick={() => navigate(`/question/${question._id}`)}
       >
         <h3 className="text-xl font-semibold hover:underline">
-          {post.postTitle}
+          {question.questionTitle}
         </h3>
         <p className="pt-2 text-gray-600 whitespace-pre-wrap">
-          {post.postContent}
+          {question.questionContent}
         </p>
       </section>
     </article>
@@ -83,4 +83,4 @@ const PostCard = ({ post }) => {
   );
 };
 
-export { PostCard };
+export { QuestionCard };

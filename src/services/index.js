@@ -6,4 +6,19 @@ export {
   deletePostService,
   editPostService,
 } from "./postServices";
+export {
+  getAllQuestionsService,
+  getUserQuestionsService,
+  addQuestionService,
+  deleteQuestionService,
+  editQuestionService,
+} from "./questionServices";
 export { getAllUsersService } from "./userServices";
+export {
+  addQueCommentService,
+  editQueCommentService,
+  deleteQueCommentService,
+  addPostCommentService,
+  editPostCommentService,
+  deletePostCommentService,
+} from "./commentServices";

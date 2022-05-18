@@ -25,12 +25,16 @@ const FollowBar = () => {
     <div className="w-72 ml-8 p-4 sticky top-20 bg-white rounded-md h-max hidden md:block shrink-0">
       <h2 className="text-md font-bold">Who to follow</h2>
       {userSuggestions.map((user) => (
-        <div className="flex justify-between items-center mt-4">
+        <div key={user._id} className="flex justify-between items-center mt-4">
           <div
             className="flex items-center gap-2 cursor-pointer"
             onClick={() => navigate(`/${user.userHandle}`)}
           >
-            <img src={user.profilePic} className="h-10 w-10 rounded-full" />
+            <img
+              src={user.profilePic}
+              className="h-10 w-10 rounded-full"
+              alt={user.userHandle}
+            />
             <div>
               <h3>
                 {user.firstName} {user.lastName}

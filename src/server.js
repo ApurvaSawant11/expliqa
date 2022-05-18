@@ -36,6 +36,14 @@ import {
   deleteAnswerCommentHandler,
 } from "./backend/controllers/CommentController";
 import {
+  getPostCommentsHandler,
+  addPostCommentHandler,
+  editPostCommentHandler,
+  deletePostCommentHandler,
+  upvotePostCommentHandler,
+  downvotePostCommentHandler,
+} from "./backend/controllers/PostCommentController";
+import {
   getAllQuestionsHandler,
   getQuestionHandler,
   getAllUserQuestionsHandler,
@@ -178,6 +186,28 @@ export function makeServer({ environment = "development" } = {}) {
       this.delete(
         "/comments/delete/:questionId/:answerId/:commentId",
         deleteAnswerCommentHandler.bind(this)
+      );
+
+      //post comments routes (public)
+      this.get("/post/comments/:postId", getPostCommentsHandler.bind(this));
+
+      //post comments routes (private)
+      this.post("/post/comments/add/:postId", addPostCommentHandler.bind(this));
+      this.post(
+        "/post/comments/edit/:postId/:commentId",
+        editPostCommentHandler.bind(this)
+      );
+      this.delete(
+        "/post/comments/delete/:postId/:commentId",
+        deletePostCommentHandler.bind(this)
+      );
+      this.post(
+        "/post/comments/upvote/:postId/:commentId",
+        upvotePostCommentHandler.bind(this)
+      );
+      this.post(
+        "/post/comments/downvote/:postId/:commentId",
+        downvotePostCommentHandler.bind(this)
       );
     },
   });

@@ -15,3 +15,11 @@ export {
 export { FaUserAlt as ProfileIcon } from "react-icons/fa";
 export { BsQuestionSquare as AskIcon } from "react-icons/bs";
 export { RiDeleteBin7Fill as DeleteIcon } from "react-icons/ri";
+export {
+  BiDownvote as DownvoteIcon,
+  BiUpvote as UpvoteIcon,
+} from "react-icons/bi";
+export {
+  MdBookmarkBorder as BookmarkOutlineIcon,
+  MdBookmark as BookmarkFillIcon,
+} from "react-icons/md";
