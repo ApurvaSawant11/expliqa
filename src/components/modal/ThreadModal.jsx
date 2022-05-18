@@ -55,6 +55,7 @@ const ThreadModal = () => {
         )
       : dispatch(
           addNewPost({
+            type: "post",
             postTitle: postInput.postTitle,
             postContent: postInput.postContent,
           })

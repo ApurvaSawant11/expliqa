@@ -5,20 +5,27 @@ import { openThreadModal } from "components/modal/threadModalSlice";
 import {
   AnswerIcon,
   BookmarkOutlineIcon,
+  CommentIcon,
   DeleteIcon,
   DownvoteIcon,
   MoreIcon,
   PostIcon,
   UpvoteIcon,
 } from "assets";
-import { deleteQuestion, addQueComment } from "features/home/questionSlice";
-import { Comment } from "components";
+import {
+  deleteQuestion,
+  addQueComment,
+  addAnswer,
+  updateQuestionVotes,
+} from "features/home/questionSlice";
+import { Answer, Comment } from "components";
 
 const SingleQuestion = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { questionId } = useParams();
-  const [comment, setComment] = useState("");
+  const [newInput, setNewInput] = useState("");
+  const [showComponent, setShowComponent] = useState("answer");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { allUsers } = useSelector((state) => state.user);
   const { allQuestions } = useSelector((state) => state.question);
@@ -28,10 +35,13 @@ const SingleQuestion = () => {
   );
   const userDetails =
     allUsers && allUsers?.find((user) => user.username === question?.username);
-
-  const commentHandler = () => {
-    dispatch(addQueComment({ questionId: question._id, commentData: comment }));
-    setComment("");
+  const newInputHandler = () => {
+    showComponent === "answer"
+      ? dispatch(addAnswer({ questionId: question._id, answerData: newInput }))
+      : dispatch(
+          addQueComment({ questionId: question._id, commentData: newInput })
+        );
+    setNewInput("");
   };
 
   const editHandler = () =>
@@ -92,7 +102,7 @@ const SingleQuestion = () => {
           </div>
         </div>
 
-        <section onClick={() => navigate(`/question/${question._id}`)}>
+        <section>
           <h3 className="text-xl font-semibold">{question.questionTitle}</h3>
           <p className="pt-2 text-gray-600 whitespace-pre-wrap">
             {question.questionContent}
@@ -101,25 +111,74 @@ const SingleQuestion = () => {
           <div className="flex items-center justify-between mt-4">
             <div className="flex bg-slate-100 rounded-full gap-4 px-4 py-1.5">
               <div className="flex items-center gap-2">
-                <UpvoteIcon size={22} className="cursor-pointer" />
+                <UpvoteIcon
+                  size={22}
+                  className={`cursor-pointer ${
+                    question.votes.upvotedBy.includes(currentUser.username)
+                      ? "text-green-600"
+                      : ""
+                  }`}
+                  onClick={() => {
+                    dispatch(
+                      updateQuestionVotes({
+                        questionId: question._id,
+                        reaction: question.votes.upvotedBy.includes(
+                          currentUser.username
+                        )
+                          ? "unvote"
+                          : "upvote",
+                      })
+                    );
+                  }}
+                />
                 <span className="text-gray-500">
                   {question.votes.upvotedBy.length}
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <DownvoteIcon size={22} className="cursor-pointer" />
+                <DownvoteIcon
+                  size={22}
+                  className={`cursor-pointer ${
+                    question.votes.downvotedBy.includes(currentUser.username)
+                      ? "text-red-600"
+                      : ""
+                  }`}
+                  onClick={() => {
+                    dispatch(
+                      updateQuestionVotes({
+                        questionId: question._id,
+                        reaction: question.votes.downvotedBy.includes(
+                          currentUser.username
+                        )
+                          ? "unvote"
+                          : "downvote",
+                      })
+                    );
+                  }}
+                />
                 <span className="text-gray-500">
                   {question.votes.downvotedBy.length}
                 </span>
               </div>
             </div>
-            <div className="flex items-center gap-2 cursor-pointer">
+            <div
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={() => setShowComponent("comment")}
+            >
+              <CommentIcon size={22} />{" "}
+              <span className="text-gray-500 hidden sm:block">Comment</span>
+            </div>
+
+            <div
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={() => setShowComponent("answer")}
+            >
               <AnswerIcon size={22} />{" "}
-              <span className="text-gray-500">Answer</span>
+              <span className="text-gray-500 hidden sm:block">Answer</span>
             </div>
             <div className="flex items-center gap-2 cursor-pointer">
               <BookmarkOutlineIcon size={24} />{" "}
-              <span className="text-gray-500">Bookmark</span>
+              <span className="text-gray-500 hidden sm:block">Bookmark</span>
             </div>
           </div>
         </section>
@@ -131,37 +190,61 @@ const SingleQuestion = () => {
           alt={currentUser.userHandle}
           className="h-8 rounded-full"
         />
-        <div className="flex grow space-between items-center rounded-md px-2 py-1">
+        <div className="flex flex-wrap gap-2 xs:grow xs:flex-nowrap space-between items-center w-full rounded-md px-2 py-1">
           <input
             className="grow focus:outline-none py-1 px-2 rounded-md"
-            placeholder="Write your comment..."
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            placeholder={`Write your ${
+              showComponent === "answer" ? "answer" : "comment"
+            } here...`}
+            value={newInput}
+            onChange={(e) => setNewInput(e.target.value)}
           />
           <button
-            className={`font-semibold uppercase bg-blue-500 text-white rounded-[4px] px-2 py-[3px] cursor-pointer ml-2 hover:bg-blue-600 ${
-              comment.trim().length < 1 &&
+            className={`w-full xs:w-max font-semibold uppercase bg-blue-500 text-white rounded-[4px] px-2 py-[3px] cursor-pointer hover:bg-blue-600 ${
+              newInput.trim().length < 1 &&
               "hover:cursor-not-allowed hover:bg-gray-400 "
             }`}
-            onClick={() => commentHandler()}
-            disabled={comment.trim().length < 1 ? true : false}
+            onClick={() => newInputHandler()}
+            disabled={newInput.trim().length < 1 ? true : false}
           >
-            Comment
+            {showComponent === "answer" ? "Answer" : "Comment"}
           </button>
         </div>
       </div>
 
-      {/* comment */}
-      <div className="flex flex-col-reverse gap-4">
-        {question.comments.length > 0 &&
-          question.comments.map((comment) => (
-            <Comment
-              key={comment._id}
-              comment={comment}
-              threadId={question._id}
-            />
-          ))}
-      </div>
+      {showComponent === "comment" ? (
+        <>
+          <h4 className="font-semibold pl-2 mb-4 text-gray-600">
+            {question.comments.length} Comment(s)
+          </h4>
+          <div className="flex flex-col-reverse gap-4">
+            {question.comments.length > 0 &&
+              question.comments.map((comment) => (
+                <Comment
+                  key={comment._id}
+                  comment={comment}
+                  threadId={question._id}
+                />
+              ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <h4 className="font-semibold pl-2 mb-4 text-gray-600">
+            {question.answers.length} Answer(s)
+          </h4>
+          <div className="flex flex-col-reverse gap-4">
+            {question.answers.length > 0 &&
+              question.answers.map((answer) => (
+                <Answer
+                  key={answer._id}
+                  answer={answer}
+                  threadId={question._id}
+                />
+              ))}
+          </div>
+        </>
+      )}
     </section>
   ) : (
     <></>

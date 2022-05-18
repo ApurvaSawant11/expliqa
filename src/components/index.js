@@ -5,3 +5,5 @@ export { FollowBar } from "./followBar/FollowBar";
 export { PostCard } from "./card/PostCard";
 export { QuestionCard } from "./card/QuestionCard";
 export { Comment } from "./comment/Comment";
+export { Answer } from "./answer/Answer";
+export { CardFooter } from "./card/CardFooter";

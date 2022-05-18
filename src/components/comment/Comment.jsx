@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { deleteQueComment, editQueComment } from "features/home/questionSlice";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  deleteAnsComment,
+  deleteQueComment,
+  editAnsComment,
+  editQueComment,
+} from "features/home/questionSlice";
 import { DeleteIcon, MoreIcon, PostIcon } from "assets";
 import { deletePostComment, editPostComment } from "features/home/postSlice";
 
-export function Comment({ comment, threadId, threadType }) {
+const Comment = ({
+  comment,
+  threadId,
+  threadType,
+  background = "bg-white",
+}) => {
   const dispatch = useDispatch();
   const { allUsers } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.auth);
@@ -13,30 +23,66 @@ export function Comment({ comment, threadId, threadType }) {
   const [inputComment, setInputComment] = useState(comment.commentData);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const navigate = useNavigate();
+  const { questionId } = useParams();
   const userDetails =
     allUsers &&
     allUsers?.find((commentUser) => comment.username === commentUser.username);
 
   const editHandler = () => {
     setIsEditOpen(false);
-    threadType === "post"
-      ? dispatch(
-          editPostComment({
-            postId: threadId,
-            commentId: comment._id,
-            commentData: inputComment,
-          })
-        )
-      : dispatch(
-          editQueComment({
-            questionId: threadId,
-            commentId: comment._id,
-            commentData: inputComment,
-          })
-        );
+    if (threadType === "post") {
+      dispatch(
+        editPostComment({
+          postId: threadId,
+          commentId: comment._id,
+          commentData: inputComment,
+        })
+      );
+    } else if (threadType === "answer-comment") {
+      dispatch(
+        editAnsComment({
+          questionId: questionId,
+          answerId: threadId,
+          commentId: comment._id,
+          commentData: inputComment,
+        })
+      );
+    } else
+      dispatch(
+        editQueComment({
+          questionId: threadId,
+          commentId: comment._id,
+          commentData: inputComment,
+        })
+      );
+  };
+
+  const deleteHandler = () => {
+    if (threadType === "post") {
+      dispatch(
+        deletePostComment({
+          postId: threadId,
+          commentId: comment._id,
+        })
+      );
+    } else if (threadType === "answer-comment") {
+      dispatch(
+        deleteAnsComment({
+          questionId: questionId,
+          answerId: threadId,
+          commentId: comment._id,
+        })
+      );
+    } else
+      dispatch(
+        deleteQueComment({
+          questionId: threadId,
+          commentId: comment._id,
+        })
+      );
   };
   return (
-    <div className="flex flex-col gap-3 bg-white p-4 rounded-md">
+    <div className={`flex flex-col gap-3 ${background} p-4 rounded-md`}>
       <div className="flex items-center justify-between h-6">
         <img
           src={userDetails?.profilePic}
@@ -72,21 +118,7 @@ export function Comment({ comment, threadId, threadType }) {
                   </li>
                   <li
                     className="flex items-center px-1 py-1 rounded-md gap-2 hover:bg-slate-200"
-                    onClick={() => {
-                      threadType === "post"
-                        ? dispatch(
-                            deletePostComment({
-                              postId: threadId,
-                              commentId: comment._id,
-                            })
-                          )
-                        : dispatch(
-                            deleteQueComment({
-                              questionId: threadId,
-                              commentId: comment._id,
-                            })
-                          );
-                    }}
+                    onClick={deleteHandler}
                   >
                     <DeleteIcon />
                     Delete
@@ -124,4 +156,6 @@ export function Comment({ comment, threadId, threadType }) {
       )}
     </div>
   );
-}
+};
+
+export { Comment };

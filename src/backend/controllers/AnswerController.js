@@ -57,14 +57,14 @@ export const addAnswerHandler = function (schema, request) {
         downvotedBy: [],
       },
       comments: [],
-      ...answerData,
+      answerText: answerData,
       username: user.username,
       createdAt: formatDate(),
       updatedAt: formatDate(),
     };
     question.answers.push(answer);
     this.db.questions.update({ _id: questionId }, question);
-    return new Response(201, {}, { answers: question.answers });
+    return new Response(201, {}, { questions: this.db.questions });
   } catch (error) {
     return new Response(
       500,
@@ -112,11 +112,11 @@ export const editAnswerHandler = function (schema, request) {
 
     question.answers[answerIndex] = {
       ...question.answers[answerIndex],
-      ...answerData,
+      answerText: answerData,
       updatedAt: formatDate(),
     };
     this.db.questions.update({ _id: questionId }, question);
-    return new Response(201, {}, { answers: question.answers });
+    return new Response(201, {}, { questions: this.db.questions });
   } catch (error) {
     return new Response(
       500,
@@ -164,7 +164,7 @@ export const deleteAnswerHandler = function (schema, request) {
     }
     question.answers.splice(answerIndex, 1);
     this.db.questions.update({ _id: questionId }, question);
-    return new Response(201, {}, { answers: question.answers });
+    return new Response(201, {}, { questions: this.db.questions });
   } catch (error) {
     return new Response(
       500,

@@ -24,6 +24,7 @@ import {
   getAnswerVotesHandler,
   voteQuestionHandler,
   voteAnswerHandler,
+  votePostHandler,
 } from "./backend/controllers/VoteController";
 import {
   getQuestionCommentsHandler,
@@ -155,6 +156,7 @@ export function makeServer({ environment = "development" } = {}) {
         "/votes/vote/:questionId/:answerId",
         voteAnswerHandler.bind(this)
       );
+      this.post("post/votes/vote/:postId", votePostHandler.bind(this));
 
       // comments routes (public)
       this.get("/comments/:questionId", getQuestionCommentsHandler.bind(this));

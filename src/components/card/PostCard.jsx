@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { openThreadModal } from "components/modal/threadModalSlice";
 import { DeleteIcon, MoreIcon, PostIcon } from "assets";
 import { deletePost } from "features/home/postSlice";
+import { CardFooter } from "./CardFooter";
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
@@ -77,6 +78,8 @@ const PostCard = ({ post }) => {
           {post.postContent}
         </p>
       </section>
+
+      <CardFooter threadId={post._id} threadType="post" />
     </article>
   ) : (
     <></>

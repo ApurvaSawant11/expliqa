@@ -8,6 +8,7 @@ import {
   addPostCommentService,
   editPostCommentService,
   deletePostCommentService,
+  updatePostVotesService,
 } from "services";
 
 const initialState = {
@@ -125,6 +126,19 @@ export const deletePostComment = createAsyncThunk(
   }
 );
 
+export const updatePostVotes = createAsyncThunk(
+  "post/updatePostVotes",
+  async ({ postId, reaction }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await updatePostVotesService(postId, reaction, token);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: "post",
   initialState,
@@ -219,6 +233,18 @@ const postSlice = createSlice({
       state.allPosts = action.payload.posts;
     },
     [deletePostComment.rejected]: (state, action) => {
+      state.postStatus = "rejected";
+      state.allPosts = action.payload;
+    },
+
+    [updatePostVotes.pending]: (state) => {
+      state.postStatus = "pending";
+    },
+    [updatePostVotes.fulfilled]: (state, action) => {
+      state.postStatus = "fulfilled";
+      state.allPosts = action.payload.posts;
+    },
+    [updatePostVotes.rejected]: (state, action) => {
       state.postStatus = "rejected";
       state.allPosts = action.payload;
     },
