@@ -26,6 +26,8 @@ const Home = () => {
     dispatch(getUserQuestions(user.username));
   }, [allPosts, allQuestions]);
 
+  console.log(allPosts, allQuestions);
+
   return (
     <main className="min-h-screen py-12 w-11/12 xs:w-4/5 md:w-11/12 lg:w-4/5 xl:w-3/5 m-auto flex">
       <div className="basis-full">

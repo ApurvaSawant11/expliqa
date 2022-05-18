@@ -83,6 +83,10 @@ export const createPostHandler = function (schema, request) {
       _id: uuid(),
       ...postData,
       comments: [],
+      votes: {
+        upvotedBy: [],
+        downvotedBy: [],
+      },
       username: user.username,
       createdAt: formatDate(),
       updatedAt: formatDate(),
