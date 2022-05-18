@@ -5,6 +5,9 @@ import {
   addPostService,
   deletePostService,
   editPostService,
+  addPostCommentService,
+  editPostCommentService,
+  deletePostCommentService,
 } from "services";
 
 const initialState = {
@@ -79,6 +82,49 @@ export const deletePost = createAsyncThunk(
   }
 );
 
+export const addPostComment = createAsyncThunk(
+  "post/addPostComment",
+  async ({ postId, commentData }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await addPostCommentService(postId, commentData, token);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const editPostComment = createAsyncThunk(
+  "post/editPostComment",
+  async ({ postId, commentId, commentData }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await editPostCommentService(
+        postId,
+        commentId,
+        commentData,
+        token
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+export const deletePostComment = createAsyncThunk(
+  "post/deletePostComment",
+  async ({ postId, commentId }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await deletePostCommentService(postId, commentId, token);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: "post",
   initialState,
@@ -140,6 +186,39 @@ const postSlice = createSlice({
       state.allPosts = action.payload.posts;
     },
     [deletePost.rejected]: (state, action) => {
+      state.postStatus = "rejected";
+      state.allPosts = action.payload;
+    },
+    [addPostComment.pending]: (state) => {
+      state.postStatus = "pending";
+    },
+    [addPostComment.fulfilled]: (state, action) => {
+      state.postStatus = "fulfilled";
+      state.allPosts = action.payload.posts;
+    },
+    [addPostComment.rejected]: (state, action) => {
+      state.postStatus = "rejected";
+      state.allPosts = action.payload;
+    },
+    [editPostComment.pending]: (state) => {
+      state.postStatus = "pending";
+    },
+    [editPostComment.fulfilled]: (state, action) => {
+      state.postStatus = "fulfilled";
+      state.allPosts = action.payload.posts;
+    },
+    [editPostComment.rejected]: (state, action) => {
+      state.postStatus = "rejected";
+      state.allPosts = action.payload;
+    },
+    [deletePostComment.pending]: (state) => {
+      state.postStatus = "pending";
+    },
+    [deletePostComment.fulfilled]: (state, action) => {
+      state.postStatus = "fulfilled";
+      state.allPosts = action.payload.posts;
+    },
+    [deletePostComment.rejected]: (state, action) => {
       state.postStatus = "rejected";
       state.allPosts = action.payload;
     },

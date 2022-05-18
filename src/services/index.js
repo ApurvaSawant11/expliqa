@@ -14,3 +14,11 @@ export {
   editQuestionService,
 } from "./questionServices";
 export { getAllUsersService } from "./userServices";
+export {
+  addQueCommentService,
+  editQueCommentService,
+  deleteQueCommentService,
+  addPostCommentService,
+  editPostCommentService,
+  deletePostCommentService,
+} from "./commentServices";

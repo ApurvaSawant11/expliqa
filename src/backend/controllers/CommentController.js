@@ -75,7 +75,7 @@ export const addQuestionCommentHandler = function (schema, request) {
 
     const comment = {
       _id: uuid(),
-      ...commentData,
+      commentData,
       username: user.username,
       createdAt: formatDate(),
       updatedAt: formatDate(),
@@ -83,7 +83,7 @@ export const addQuestionCommentHandler = function (schema, request) {
     const question = schema.questions.findBy({ _id: questionId }).attrs;
     question.comments.push(comment);
     this.db.questions.update({ _id: questionId }, question);
-    return new Response(201, {}, { comments: question.comments });
+    return new Response(201, {}, { questions: this.db.questions });
   } catch (error) {
     return new Response(
       500,
@@ -129,11 +129,11 @@ export const editQuestionCommentHandler = function (schema, request) {
     }
     question.comments[commentIndex] = {
       ...question.comments[commentIndex],
-      ...commentData,
+      commentData,
       updatedAt: formatDate(),
     };
     this.db.questions.update({ _id: questionId }, question);
-    return new Response(201, {}, { comments: question.comments });
+    return new Response(201, {}, { questions: this.db.questions });
   } catch (error) {
     return new Response(
       500,
@@ -183,7 +183,7 @@ export const deleteQuestionCommentHandler = function (schema, request) {
       (comment) => comment._id !== commentId
     );
     this.db.questions.update({ _id: questionId }, question);
-    return new Response(201, {}, { comments: question.comments });
+    return new Response(201, {}, { questions: this.db.questions });
   } catch (error) {
     return new Response(
       500,

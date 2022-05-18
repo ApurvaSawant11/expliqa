@@ -9,6 +9,7 @@ import { formatDate } from "../utils/authUtils";
 export const posts = [
   {
     _id: uuid(),
+    type: "post",
     postTitle: "Inflation and economy",
     postContent:
       "Why is inflation so high and will it stay that way? An economist explains \n\nInflation is rising and the prospect of a cost of living crisis looms for many people across the world. \n\nApril saw a CPI (consumer price index) increase of 8.3%, while US inflation has stayed at a 40-year high. ",
@@ -23,7 +24,7 @@ export const posts = [
       {
         _id: uuid(),
         username: "apurvasawant@gmail.com",
-        text: "Keep these posts coming! Great value!",
+        commentData: "Keep these posts coming! Great value!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -34,6 +35,7 @@ export const posts = [
 
   {
     _id: uuid(),
+    type: "post",
     postTitle: "Notorious job-interview questions",
     postContent:
       "“Where do you see yourself in five years?” \n\nIt’s one of the notorious job-interview questions of our time, isn’t it? And a valuable one, as human resources professionals seek to evaluate candidates’ thoughtfulness and ambition. ",
@@ -48,7 +50,7 @@ export const posts = [
       {
         _id: uuid(),
         username: "adarshbalika@gmail.com",
-        text: "Would love to here more!",
+        commentData: "Would love to here more!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],

@@ -19,10 +19,12 @@ const ThreadModal = () => {
   const initialPostState = {
     postTitle: "",
     postContent: "",
+    type: "post",
   };
   const initialQuestionState = {
     questionTitle: "",
     questionContent: "",
+    type: "question",
   };
 
   const [postInput, setPostInput] = useState(initialPostState);
@@ -41,8 +43,6 @@ const ThreadModal = () => {
   useEffect(() => {
     setActiveIndex(threadTabIndex);
   }, [threadTabIndex]);
-
-  // console.log("here", threadInfo);
 
   const postHandler = () => {
     threadInfo

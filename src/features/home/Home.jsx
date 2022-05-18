@@ -5,6 +5,7 @@ import { getUserPosts } from "./postSlice";
 import { FollowBar, PostCard, QuestionCard } from "components";
 import { AnswerIcon, AskIcon, PostIcon } from "assets";
 import { useNavigate } from "react-router-dom";
+import { getUserQuestions } from "./questionSlice";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -15,14 +16,15 @@ const Home = () => {
   const [feedPosts, setFeedPosts] = useState([]);
 
   useEffect(() => {
-    if (allPosts.length > 0) {
-      setFeedPosts(allPosts);
+    if (allPosts.length > 0 && allQuestions.length > 0) {
+      setFeedPosts([...allPosts, ...allQuestions]);
     }
-  }, [user, allPosts]);
+  }, [user, allPosts, allQuestions]);
 
   useEffect(() => {
     dispatch(getUserPosts(user.username));
-  }, [allPosts]);
+    dispatch(getUserQuestions(user.username));
+  }, [allPosts, allQuestions]);
 
   return (
     <main className="min-h-screen py-12 w-11/12 xs:w-4/5 md:w-11/12 lg:w-4/5 xl:w-3/5 m-auto flex">
@@ -59,9 +61,13 @@ const Home = () => {
         </section>
 
         <section>
-          {feedPosts.map((post) => (
-            <PostCard post={post} key={post._id} />
-          ))}
+          {feedPosts.map((thread) => {
+            return thread.type === "post" ? (
+              <PostCard post={thread} key={thread._id} />
+            ) : (
+              <QuestionCard question={thread} key={thread._id} />
+            );
+          })}
         </section>
       </div>
       <FollowBar />

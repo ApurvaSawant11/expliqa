@@ -5,6 +5,9 @@ import {
   addQuestionService,
   deleteQuestionService,
   editQuestionService,
+  addQueCommentService,
+  editQueCommentService,
+  deleteQueCommentService,
 } from "services";
 
 const initialState = {
@@ -79,6 +82,58 @@ export const deleteQuestion = createAsyncThunk(
   }
 );
 
+export const addQueComment = createAsyncThunk(
+  "question/addQueComment",
+  async ({ questionId, commentData }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await addQueCommentService(
+        questionId,
+        commentData,
+        token
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const editQueComment = createAsyncThunk(
+  "question/editQueComment",
+  async ({ questionId, commentId, commentData }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await editQueCommentService(
+        questionId,
+        commentId,
+        commentData,
+        token
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteQueComment = createAsyncThunk(
+  "question/deleteQueComment",
+  async ({ questionId, commentId }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await deleteQueCommentService(
+        questionId,
+        commentId,
+        token
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const questionSlice = createSlice({
   name: "question",
   initialState,
@@ -140,6 +195,42 @@ const questionSlice = createSlice({
       state.allQuestions = action.payload.questions;
     },
     [deleteQuestion.rejected]: (state, action) => {
+      state.questionStatus = "rejected";
+      state.allQuestions = action.payload;
+    },
+
+    [addQueComment.pending]: (state) => {
+      state.questionStatus = "pending";
+    },
+    [addQueComment.fulfilled]: (state, action) => {
+      state.questionStatus = "fulfilled";
+      state.allQuestions = action.payload.questions;
+    },
+    [addQueComment.rejected]: (state, action) => {
+      state.questionStatus = "rejected";
+      state.allQuestions = action.payload;
+    },
+
+    [editQueComment.pending]: (state) => {
+      state.questionStatus = "pending";
+    },
+    [editQueComment.fulfilled]: (state, action) => {
+      state.questionStatus = "fulfilled";
+      state.allQuestions = action.payload.questions;
+    },
+    [editQueComment.rejected]: (state, action) => {
+      state.questionStatus = "rejected";
+      state.allQuestions = action.payload;
+    },
+
+    [deleteQueComment.pending]: (state) => {
+      state.questionStatus = "pending";
+    },
+    [deleteQueComment.fulfilled]: (state, action) => {
+      state.questionStatus = "fulfilled";
+      state.allQuestions = action.payload.questions;
+    },
+    [deleteQueComment.rejected]: (state, action) => {
       state.questionStatus = "rejected";
       state.allQuestions = action.payload;
     },

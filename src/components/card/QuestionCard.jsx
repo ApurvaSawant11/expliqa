@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { openThreadModal } from "components/modal/threadModalSlice";
@@ -19,7 +18,7 @@ const QuestionCard = ({ question }) => {
     dispatch(openThreadModal({ thread: question, tabIndex: 2 }));
 
   return userDetails ? (
-    <div className="mt-4 p-4 bg-white flex flex-col rounded-md">
+    <article className="mt-4 p-4 bg-white flex flex-col rounded-md">
       <div className="flex items-center">
         <img
           src={userDetails?.profilePic}
@@ -67,11 +66,18 @@ const QuestionCard = ({ question }) => {
         </div>
       </div>
 
-      <h3 className="text-xl font-semibold">{question.questionTitle}</h3>
-      <p className="pt-2 text-gray-600 whitespace-pre-wrap">
-        {question.questionContent}
-      </p>
-    </div>
+      <section
+        className="cursor-pointer"
+        onClick={() => navigate(`/question/${question._id}`)}
+      >
+        <h3 className="text-xl font-semibold hover:underline">
+          {question.questionTitle}
+        </h3>
+        <p className="pt-2 text-gray-600 whitespace-pre-wrap">
+          {question.questionContent}
+        </p>
+      </section>
+    </article>
   ) : (
     <></>
   );
