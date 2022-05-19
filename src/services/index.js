@@ -22,3 +22,15 @@ export {
   editPostCommentService,
   deletePostCommentService,
 } from "./commentServices";
+export {
+  addAnswerService,
+  editAnswerService,
+  deleteAnswerService,
+  addAnsCommentService,
+  editAnsCommentService,
+  deleteAnsCommentService,
+} from "./answerServices";
+export {
+  updateQuestionVotesService,
+  updatePostVotesService,
+} from "./voteServices";

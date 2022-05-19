@@ -18,6 +18,7 @@ export { RiDeleteBin7Fill as DeleteIcon } from "react-icons/ri";
 export {
   BiDownvote as DownvoteIcon,
   BiUpvote as UpvoteIcon,
+  BiComment as CommentIcon,
 } from "react-icons/bi";
 export {
   MdBookmarkBorder as BookmarkOutlineIcon,

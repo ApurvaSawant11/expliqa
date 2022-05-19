@@ -111,7 +111,7 @@ export const voteQuestionHandler = function (schema, request) {
         );
     }
     this.db.questions.update({ _id: questionId }, question);
-    return new Response(201, {}, { votes: question.votes });
+    return new Response(201, {}, { questions: this.db.questions });
   } catch (error) {
     return new Response(
       500,
@@ -183,7 +183,79 @@ export const voteAnswerHandler = function (schema, request) {
         );
     }
     this.db.questions.update({ _id: questionId }, question);
-    return new Response(201, {}, { votes: answer.votes });
+    return new Response(201, {}, { questions: this.db.questions });
+  } catch (error) {
+    return new Response(
+      500,
+      {},
+      {
+        error,
+      }
+    );
+  }
+};
+
+/**
+ * This handler handles reacting to a particular post in the db.
+ * send POST Request at /api/post/votes/vote/:postId
+ * */
+
+export const votePostHandler = function (schema, request) {
+  const user = requiresAuth.call(this, request);
+  const postId = request.params.postId;
+  try {
+    if (!user) {
+      return new Response(
+        404,
+        {},
+        {
+          errors: [
+            "The username you entered is not Registered. Not Found error",
+          ],
+        }
+      );
+    }
+    const post = schema.posts.findBy({ _id: postId }).attrs;
+    const vote = JSON.parse(request.requestBody);
+
+    switch (vote.reaction) {
+      case "upvote":
+        if (!post.votes.upvotedBy.includes(user.username)) {
+          post.votes.upvotedBy.push(user.username);
+        }
+        post.votes.downvotedBy = post.votes.downvotedBy.filter(
+          (username) => username !== user.username
+        );
+        break;
+      case "downvote":
+        if (!post.votes.downvotedBy.includes(user.username)) {
+          post.votes.downvotedBy.push(user.username);
+        }
+        post.votes.upvotedBy = post.votes.upvotedBy.filter(
+          (username) => username !== user.username
+        );
+        break;
+      case "unvote":
+        post.votes.upvotedBy = post.votes.upvotedBy.filter(
+          (username) => username !== user.username
+        );
+        post.votes.downvotedBy = post.votes.downvotedBy.filter(
+          (username) => username !== user.username
+        );
+        break;
+      default:
+        return new Response(
+          400,
+          {},
+          {
+            errors: [
+              "Invalid Reaction. Please Try with a valid Reaction again.",
+            ],
+          }
+        );
+    }
+    this.db.posts.update({ _id: postId }, post);
+    return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
       500,

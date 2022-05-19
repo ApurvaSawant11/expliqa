@@ -8,6 +8,13 @@ import {
   addQueCommentService,
   editQueCommentService,
   deleteQueCommentService,
+  addAnswerService,
+  editAnswerService,
+  deleteAnswerService,
+  addAnsCommentService,
+  editAnsCommentService,
+  deleteAnsCommentService,
+  updateQuestionVotesService,
 } from "services";
 
 const initialState = {
@@ -134,6 +141,124 @@ export const deleteQueComment = createAsyncThunk(
   }
 );
 
+export const addAnswer = createAsyncThunk(
+  "question/addAnswer",
+  async ({ questionId, answerData }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await addAnswerService(questionId, answerData, token);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const editAnswer = createAsyncThunk(
+  "question/editAnswer",
+  async ({ questionId, answerId, answerData }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await editAnswerService(
+        questionId,
+        answerId,
+        answerData,
+        token
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteAnswer = createAsyncThunk(
+  "question/deleteAnswer",
+  async ({ questionId, answerId }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await deleteAnswerService(questionId, answerId, token);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const addAnsComment = createAsyncThunk(
+  "question/addAnsComment",
+  async ({ questionId, answerId, commentData }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await addAnsCommentService(
+        questionId,
+        answerId,
+        commentData,
+        token
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const editAnsComment = createAsyncThunk(
+  "question/editAnsComment",
+  async (
+    { questionId, answerId, commentId, commentData },
+    { rejectWithValue }
+  ) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await editAnsCommentService(
+        questionId,
+        answerId,
+        commentData,
+        commentId,
+        token
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteAnsComment = createAsyncThunk(
+  "question/deleteAnsComment",
+  async ({ questionId, answerId, commentId }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await deleteAnsCommentService(
+        questionId,
+        answerId,
+        commentId,
+        token
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+export const updateQuestionVotes = createAsyncThunk(
+  "question/updateQuestionVotes",
+  async ({ questionId, reaction }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = await updateQuestionVotesService(
+        questionId,
+        reaction,
+        token
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const questionSlice = createSlice({
   name: "question",
   initialState,
@@ -231,6 +356,90 @@ const questionSlice = createSlice({
       state.allQuestions = action.payload.questions;
     },
     [deleteQueComment.rejected]: (state, action) => {
+      state.questionStatus = "rejected";
+      state.allQuestions = action.payload;
+    },
+
+    [addAnswer.pending]: (state) => {
+      state.questionStatus = "pending";
+    },
+    [addAnswer.fulfilled]: (state, action) => {
+      state.questionStatus = "fulfilled";
+      state.allQuestions = action.payload.questions;
+    },
+    [addAnswer.rejected]: (state, action) => {
+      state.questionStatus = "rejected";
+      state.allQuestions = action.payload;
+    },
+
+    [editAnswer.pending]: (state) => {
+      state.questionStatus = "pending";
+    },
+    [editAnswer.fulfilled]: (state, action) => {
+      state.questionStatus = "fulfilled";
+      state.allQuestions = action.payload.questions;
+    },
+    [editAnswer.rejected]: (state, action) => {
+      state.questionStatus = "rejected";
+      state.allQuestions = action.payload;
+    },
+
+    [deleteAnswer.pending]: (state) => {
+      state.questionStatus = "pending";
+    },
+    [deleteAnswer.fulfilled]: (state, action) => {
+      state.questionStatus = "fulfilled";
+      state.allQuestions = action.payload.questions;
+    },
+    [deleteAnswer.rejected]: (state, action) => {
+      state.questionStatus = "rejected";
+      state.allQuestions = action.payload;
+    },
+
+    [addAnsComment.pending]: (state) => {
+      state.questionStatus = "pending";
+    },
+    [addAnsComment.fulfilled]: (state, action) => {
+      state.questionStatus = "fulfilled";
+      state.allQuestions = action.payload.questions;
+    },
+    [addAnsComment.rejected]: (state, action) => {
+      state.questionStatus = "rejected";
+      state.allQuestions = action.payload;
+    },
+
+    [editAnsComment.pending]: (state) => {
+      state.questionStatus = "pending";
+    },
+    [editAnsComment.fulfilled]: (state, action) => {
+      state.questionStatus = "fulfilled";
+      state.allQuestions = action.payload.questions;
+    },
+    [editAnsComment.rejected]: (state, action) => {
+      state.questionStatus = "rejected";
+      state.allQuestions = action.payload;
+    },
+
+    [deleteAnsComment.pending]: (state) => {
+      state.questionStatus = "pending";
+    },
+    [deleteAnsComment.fulfilled]: (state, action) => {
+      state.questionStatus = "fulfilled";
+      state.allQuestions = action.payload.questions;
+    },
+    [deleteAnsComment.rejected]: (state, action) => {
+      state.questionStatus = "rejected";
+      state.allQuestions = action.payload;
+    },
+
+    [updateQuestionVotes.pending]: (state) => {
+      state.questionStatus = "pending";
+    },
+    [updateQuestionVotes.fulfilled]: (state, action) => {
+      state.questionStatus = "fulfilled";
+      state.allQuestions = action.payload.questions;
+    },
+    [updateQuestionVotes.rejected]: (state, action) => {
       state.questionStatus = "rejected";
       state.allQuestions = action.payload;
     },

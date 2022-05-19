@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { openThreadModal } from "components/modal/threadModalSlice";
-import {
-  AnswerIcon,
-  BookmarkOutlineIcon,
-  DeleteIcon,
-  DownvoteIcon,
-  MoreIcon,
-  PostIcon,
-  UpvoteIcon,
-} from "assets";
+import { DeleteIcon, MoreIcon, PostIcon } from "assets";
 import { deletePost, addPostComment } from "features/home/postSlice";
-import { Comment } from "components";
+import { CardFooter, Comment } from "components";
 
 const SinglePost = () => {
   const dispatch = useDispatch();
@@ -90,36 +82,12 @@ const SinglePost = () => {
           </div>
         </div>
 
-        <section onClick={() => navigate(`/post/${post._id}`)}>
+        <section>
           <h3 className="text-xl font-semibold">{post.postTitle}</h3>
           <p className="pt-2 text-gray-600 whitespace-pre-wrap">
             {post.postContent}
           </p>
-
-          <div className="flex items-center justify-between mt-4">
-            <div className="flex bg-slate-100 rounded-full gap-4 px-4 py-1.5">
-              <div className="flex items-center gap-2">
-                <UpvoteIcon size={22} className="cursor-pointer" />
-                <span className="text-gray-500">
-                  {post.votes.upvotedBy.length}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <DownvoteIcon size={22} className="cursor-pointer" />
-                <span className="text-gray-500">
-                  {post.votes.downvotedBy.length}
-                </span>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 cursor-pointer">
-              <AnswerIcon size={22} />{" "}
-              <span className="text-gray-500">Comment</span>
-            </div>
-            <div className="flex items-center gap-2 cursor-pointer">
-              <BookmarkOutlineIcon size={24} />{" "}
-              <span className="text-gray-500">Bookmark</span>
-            </div>
-          </div>
+          <CardFooter threadId={post._id} threadType="post" />
         </section>
       </article>
 
@@ -129,7 +97,7 @@ const SinglePost = () => {
           alt={currentUser.userHandle}
           className="h-8 rounded-full"
         />
-        <div className="flex grow space-between items-center rounded-md px-2 py-1">
+        <div className="flex flex-wrap gap-2 xs:grow xs:flex-nowrap space-between items-center w-full rounded-md px-2 py-1">
           <input
             className="grow focus:outline-none py-1 px-2 rounded-md"
             placeholder="Write your comment..."
@@ -137,7 +105,7 @@ const SinglePost = () => {
             onChange={(e) => setComment(e.target.value)}
           />
           <button
-            className={`font-semibold uppercase bg-blue-500 text-white rounded-[4px] px-2 py-[3px] cursor-pointer ml-2 hover:bg-blue-600 ${
+            className={`w-full xs:w-max font-semibold uppercase bg-blue-500 text-white rounded-[4px] px-2 py-[3px] cursor-pointer  hover:bg-blue-600 ${
               comment.trim().length < 1 &&
               "hover:cursor-not-allowed hover:bg-gray-400 "
             }`}
@@ -150,6 +118,9 @@ const SinglePost = () => {
       </div>
 
       {/* comment */}
+      <h4 className="font-semibold pl-2 mb-4 text-gray-600">
+        {post.comments.length} Comment(s)
+      </h4>
       <div className="flex flex-col-reverse gap-4">
         {post.comments.length > 0 &&
           post.comments.map((comment) => (
