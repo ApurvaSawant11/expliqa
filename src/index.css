@@ -8,4 +8,5 @@
     --toastify-color-warning:#f7cc42 !important;
     --toastify-color-error: #fc2424 !important;
     --toastify-text-color-light: black !important;
+    --react-chip-input__box-shadow-color: none;
 }

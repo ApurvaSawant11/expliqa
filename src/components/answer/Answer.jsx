@@ -137,6 +137,7 @@ const Answer = ({ answer, threadId }) => {
                   inputAnsComment.trim().length < 1 &&
                   "hover:cursor-not-allowed hover:bg-gray-400"
                 }`}
+                disabled={inputAnsComment.trim().length < 1 ? true : false}
                 onClick={() => {
                   dispatch(
                     addAnsComment({

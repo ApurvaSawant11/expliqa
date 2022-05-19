@@ -86,6 +86,7 @@ export const addQuestionHandler = function (schema, request) {
       },
       comments: [],
       answers: [],
+      bookmark: [],
       ...questionData,
       username: user.username,
       createdAt: formatDate(),

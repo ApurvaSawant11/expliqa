@@ -14,4 +14,52 @@
     background: linear-gradient(180deg, #08AEEA 0%, #2AF598 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
+}
+
+.styles_chip-input__3aumB .styles_chip__i-PT7 {
+    background-color: #22c55e;
+    border: none;
+    color: #ffffff;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+
+.styles_chip-input__3aumB {
+    margin-top:5px
+}
+
+.styles_chip-input__3aumB .styles_chip__i-PT7:hover {
+    background-color: #1abd55
+}
+
+.styles_chip-input__3aumB .no-gutters{
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+}
+
+.styles_chip-input__3aumB .no-gutters .p-2.col-auto{
+    padding: 0 6px 0 0;
+}
+
+.styles_chip-input__3aumB .col{
+    width: 100%;
+    margin-top: 1rem;
+}
+
+input[name="chipInput"] {
+    width: 100%;
+    outline: none;
+    border-bottom: 2px solid #d1d5db;
+}
+
+.styles_cursor-pointer__2Jvz5 {
+    margin:0;
+}
+
+.filter-input input[name="chipInput"] {
+    padding: 5px 1rem;
+}

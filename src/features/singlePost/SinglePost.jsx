@@ -87,7 +87,7 @@ const SinglePost = () => {
           <p className="pt-2 text-gray-600 whitespace-pre-wrap">
             {post.postContent}
           </p>
-          <CardFooter threadId={post._id} threadType="post" />
+          <CardFooter thread={post} threadType="post" />
         </section>
       </article>
 

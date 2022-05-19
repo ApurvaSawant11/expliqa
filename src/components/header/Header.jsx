@@ -2,22 +2,37 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
-import { AnswerIcon, LogoutIcon, ProfileIcon, TrendingIcon } from "assets";
+import {
+  AnswerIcon,
+  BookmarkIcon,
+  LogoutIcon,
+  ProfileIcon,
+  SearchIcon,
+} from "assets";
+import { SearchModal } from "components";
 
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [isShowDropDown, setIsShowDropDown] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
   const navigate = useNavigate();
   return (
     <header className="flex sticky top-0 items-center justify-between px-6 py-3 bg-white rounded-b-xl z-10">
-      <div>
-        <h1 className="text-gradient font-bold text-4xl">expliqa</h1>
-      </div>
+      <h1
+        className="text-gradient font-bold text-4xl cursor-pointer"
+        onClick={() => navigate("/")}
+      >
+        expliqa
+      </h1>
+
       <div className="flex gap-4 xs:text-lg text-2xl">
-        <div className="flex items-center gap-1 cursor-pointer">
-          <TrendingIcon />
-          <span className="hidden xs:block">Trending</span>
+        <div
+          className="flex items-center gap-1 cursor-pointer"
+          onClick={() => setShowSearchModal(true)}
+        >
+          <SearchIcon size={18} />
+          <span className="hidden xs:block">Search</span>
         </div>
         <div className="flex items-center gap-1 cursor-pointer">
           <AnswerIcon />
@@ -52,6 +67,23 @@ const Header = () => {
             Profile
           </li>
           <li
+            className="hover:bg-slate-200 flex items-center gap-4  px-3 py-1 rounded-md cursor-pointer"
+            tabIndex="0"
+            onClick={() => {
+              navigate("/bookmarks");
+              setIsShowDropDown(false);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                navigate("/bookmarks");
+                setIsShowDropDown(false);
+              }
+            }}
+          >
+            <BookmarkIcon />
+            Bookmarks
+          </li>
+          <li
             className="hover:bg-slate-200 flex items-center gap-4 px-3 py-1 rounded-md cursor-pointer"
             tabIndex="0"
             onClick={() => {
@@ -69,6 +101,10 @@ const Header = () => {
             Logout
           </li>
         </ul>
+      )}
+
+      {showSearchModal && (
+        <SearchModal setShowSearchModal={setShowSearchModal} />
       )}
     </header>
   );

@@ -67,11 +67,23 @@ const QuestionCard = ({ question }) => {
         </div>
       </div>
 
+      <section className="flex">
+        {question.tags?.map((tag, index) => (
+          <div
+            key={index}
+            className="mr-2 text-blue-700 bg-slate-200 px-1 text-sm rounded-md my-2"
+          >
+            #{tag}
+          </div>
+        ))}
+      </section>
+
       <section
         className="cursor-pointer"
         onClick={() => navigate(`/question/${question._id}`)}
       >
         <h3 className="text-xl font-semibold hover:underline">
+          <span className="font-bold">Q. </span>
           {question.questionTitle}
         </h3>
         <p className="pt-2 text-gray-600 whitespace-pre-wrap">
@@ -79,7 +91,7 @@ const QuestionCard = ({ question }) => {
         </p>
       </section>
 
-      <CardFooter threadId={question._id} threadType="question" />
+      <CardFooter thread={question} threadType="question" />
     </article>
   ) : (
     <></>
