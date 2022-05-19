@@ -27,12 +27,7 @@ const SearchModal = ({ setShowSearchModal }) => {
         className={`flex items-start justify-center fixed top-0 bottom-0 left-0 right-0 bg-overlay`}
         onClick={() => setShowSearchModal(false)}
       >
-        <div
-          onClick={(event) => {
-            event.stopPropagation();
-          }}
-          className="mx-auto mt-[5rem]  form-wrapper relative"
-        >
+        <div className="mx-auto mt-[5rem] form-wrapper relative">
           <div className="flex items-center bg-white rounded-md p-4 gap-3">
             <SearchIcon />
             <input

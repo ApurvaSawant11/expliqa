@@ -19,7 +19,6 @@ const FilterBar = ({ setFeedPosts }) => {
     } else if (sortCategory === "most-upvotes") {
       sortByUpvotes();
     } else {
-      console.log("------here----");
       sortByLatest();
     }
     dispatch(getUserPosts(user.username));
