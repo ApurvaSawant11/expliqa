@@ -19,6 +19,7 @@ const FilterBar = ({ setFeedPosts }) => {
     } else if (sortCategory === "most-upvotes") {
       sortByUpvotes();
     } else {
+      console.log("------here----");
       sortByLatest();
     }
     dispatch(getUserPosts(user.username));
@@ -90,11 +91,14 @@ const FilterBar = ({ setFeedPosts }) => {
         className="flex bg-white justify-between px-4
        py-2 rounded-md mb-2"
       >
-        <button className="flex items-center gap-1" onClick={trendingHandler}>
+        <button
+          className="flex items-center justify-center gap-1 basis-full"
+          onClick={trendingHandler}
+        >
           <FireIcon size={20} className="text-orange-500" /> Trending
         </button>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center justify-center gap-1 basis-full">
           <FilterIcon size={14} className="mt-px" />
           <select
             name="filter"
@@ -113,12 +117,12 @@ const FilterBar = ({ setFeedPosts }) => {
             <option value="content">By Content</option>
           </select>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center justify-center gap-1 basis-full">
           <SortIcon />
           <select
             name="sort"
             id="sort"
-            className="outline-none"
+            className="outline-none w-[6rem]"
             value={sortCategory}
             onChange={(e) => {
               setSortCategory(e.target.value);
