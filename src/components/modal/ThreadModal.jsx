@@ -5,6 +5,7 @@ import { addNewPost, editPost } from "features/home/postSlice";
 import { addNewQuestion, editQuestion } from "features/home/questionSlice";
 import { closeThreadModal } from "./threadModalSlice";
 import TextareaAutosize from "react-textarea-autosize";
+import { ThreadTags } from "./ThreadTags";
 
 const ThreadModal = () => {
   const checkActive = (index, className) =>
@@ -19,11 +20,13 @@ const ThreadModal = () => {
   const initialPostState = {
     postTitle: "",
     postContent: "",
+    tags: [],
     type: "post",
   };
   const initialQuestionState = {
     questionTitle: "",
     questionContent: "",
+    tags: [],
     type: "question",
   };
 
@@ -49,15 +52,13 @@ const ThreadModal = () => {
       ? dispatch(
           editPost({
             ...threadInfo,
-            postTitle: postInput.postTitle,
-            postContent: postInput.postContent,
+            ...postInput,
           })
         )
       : dispatch(
           addNewPost({
             type: "post",
-            postTitle: postInput.postTitle,
-            postContent: postInput.postContent,
+            ...postInput,
           })
         );
     setPostInput(initialPostState);
@@ -69,14 +70,12 @@ const ThreadModal = () => {
       ? dispatch(
           editQuestion({
             ...threadInfo,
-            questionTitle: questionInput.questionTitle,
-            questionContent: questionInput.questionContent,
+            ...questionInput,
           })
         )
       : dispatch(
           addNewQuestion({
-            questionTitle: questionInput.questionTitle,
-            questionContent: questionInput.questionContent,
+            ...questionInput,
           })
         );
     setQuestionInput(initialQuestionState);
@@ -130,7 +129,7 @@ const ThreadModal = () => {
           <div className="mt-2">
             {activeIndex === 1 ? (
               <>
-                <div className="h-[15rem]">
+                <div>
                   <input
                     className="p-2 text-black w-full focus:outline-none border-b-2"
                     placeholder="Post title"
@@ -143,7 +142,7 @@ const ThreadModal = () => {
                     }
                   />
                   <TextareaAutosize
-                    className="resize-none p-2 w-full focus:outline-none"
+                    className="resize-none p-2 w-full focus:outline-none border-b-2 border-gray-300"
                     minRows={8}
                     maxRows={8}
                     placeholder="Write something awesome..."
@@ -154,6 +153,11 @@ const ThreadModal = () => {
                         postContent: e.target.value,
                       })
                     }
+                  />
+                  <span className="text-gray-400">Add upto 5 tags below:</span>
+                  <ThreadTags
+                    threadTags={postInput.tags}
+                    setThreadInput={setPostInput}
                   />
                 </div>
                 <div className="flex justify-end mt-6">
@@ -182,7 +186,7 @@ const ThreadModal = () => {
               </>
             ) : (
               <>
-                <div className="h-[15rem]">
+                <div>
                   <input
                     className="p-2 text-black w-full focus:outline-none border-b-2"
                     placeholder="Start a question with What How Why.."
@@ -195,7 +199,7 @@ const ThreadModal = () => {
                     }
                   />
                   <TextareaAutosize
-                    className="resize-none p-2 w-full focus:outline-none"
+                    className="resize-none p-2 w-full focus:outline-none border-b-2 border-gray-300"
                     minRows={8}
                     maxRows={8}
                     placeholder="Question description"
@@ -206,6 +210,11 @@ const ThreadModal = () => {
                         questionContent: e.target.value,
                       })
                     }
+                  />
+                  <span className="text-gray-400">Add upto 5 tags below:</span>
+                  <ThreadTags
+                    threadTags={questionInput.tags}
+                    setThreadInput={setQuestionInput}
                   />
                 </div>
                 <div className="flex justify-end mt-6">

@@ -12,8 +12,16 @@ export {
   FiEdit2 as PostIcon,
   FiMoreVertical as MoreIcon,
 } from "react-icons/fi";
-export { FaUserAlt as ProfileIcon } from "react-icons/fa";
-export { BsQuestionSquare as AskIcon } from "react-icons/bs";
+export {
+  FaUserAlt as ProfileIcon,
+  FaFilter as FilterIcon,
+  FaSort as SortIcon,
+} from "react-icons/fa";
+export {
+  BsQuestionSquare as AskIcon,
+  BsBookmark as BookmarkIcon,
+  BsSearch as SearchIcon,
+} from "react-icons/bs";
 export { RiDeleteBin7Fill as DeleteIcon } from "react-icons/ri";
 export {
   BiDownvote as DownvoteIcon,
@@ -23,4 +31,5 @@ export {
 export {
   MdBookmarkBorder as BookmarkOutlineIcon,
   MdBookmark as BookmarkFillIcon,
+  MdOutlineLocalFireDepartment as FireIcon,
 } from "react-icons/md";

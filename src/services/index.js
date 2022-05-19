@@ -34,3 +34,9 @@ export {
   updateQuestionVotesService,
   updatePostVotesService,
 } from "./voteServices";
+export {
+  addPostBookmarkService,
+  removePostBookmarkService,
+  addQueBookmarkService,
+  removeQueBookmarkService,
+} from "./bookmarkServices";

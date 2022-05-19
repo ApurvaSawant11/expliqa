@@ -9,6 +9,8 @@ import {
   editPostCommentService,
   deletePostCommentService,
   updatePostVotesService,
+  addPostBookmarkService,
+  removePostBookmarkService,
 } from "services";
 
 const initialState = {
@@ -139,6 +141,21 @@ export const updatePostVotes = createAsyncThunk(
   }
 );
 
+export const addOrRemovePostBookmark = createAsyncThunk(
+  "post/addOrRemovePostBookmark",
+  async ({ postId, isBookmark }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = isBookmark
+        ? await addPostBookmarkService(postId, token)
+        : await removePostBookmarkService(postId, token);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const postSlice = createSlice({
   name: "post",
   initialState,
@@ -245,6 +262,17 @@ const postSlice = createSlice({
       state.allPosts = action.payload.posts;
     },
     [updatePostVotes.rejected]: (state, action) => {
+      state.postStatus = "rejected";
+      state.allPosts = action.payload;
+    },
+    [addOrRemovePostBookmark.pending]: (state) => {
+      state.postStatus = "pending";
+    },
+    [addOrRemovePostBookmark.fulfilled]: (state, action) => {
+      state.postStatus = "fulfilled";
+      state.allPosts = action.payload.posts;
+    },
+    [addOrRemovePostBookmark.rejected]: (state, action) => {
       state.postStatus = "rejected";
       state.allPosts = action.payload;
     },

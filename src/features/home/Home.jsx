@@ -1,35 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { openThreadModal } from "components/modal/threadModalSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserPosts } from "./postSlice";
-import { FollowBar, PostCard, QuestionCard } from "components";
+import { useDispatch } from "react-redux";
+import { FilterBar, FollowBar, PostCard, QuestionCard } from "components";
 import { AnswerIcon, AskIcon, PostIcon } from "assets";
 import { useNavigate } from "react-router-dom";
-import { getUserQuestions } from "./questionSlice";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
-  const { allPosts } = useSelector((state) => state.post);
-  const { allQuestions } = useSelector((state) => state.question);
   const [feedPosts, setFeedPosts] = useState([]);
-
-  useEffect(() => {
-    if (allPosts.length > 0 && allQuestions.length > 0) {
-      setFeedPosts([...allPosts, ...allQuestions]);
-    }
-  }, [user, allPosts, allQuestions]);
-
-  useEffect(() => {
-    dispatch(getUserPosts(user.username));
-    dispatch(getUserQuestions(user.username));
-  }, [allPosts, allQuestions]);
 
   return (
     <main className="min-h-screen py-12 w-11/12 xs:w-4/5 md:w-11/12 lg:w-4/5 xl:w-3/5 m-auto flex">
       <div className="basis-full">
-        <section className="bg-white p-2 pt-4 rounded-md mb-10">
+        <section className="bg-white p-2 pt-4 rounded-md mb-7">
           <div
             className="w-full bg-slate-100 rounded-2xl p-2 pl-3 text-gray-500"
             onClick={() => dispatch(openThreadModal({ tabIndex: 1 }))}
@@ -60,7 +44,9 @@ const Home = () => {
           </div>
         </section>
 
-        <section>
+        <FilterBar setFeedPosts={setFeedPosts} />
+
+        <section className="mt-7">
           {feedPosts.map((thread) => {
             return thread.type === "post" ? (
               <PostCard post={thread} key={thread._id} />

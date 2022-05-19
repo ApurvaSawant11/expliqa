@@ -15,6 +15,8 @@ import {
   editAnsCommentService,
   deleteAnsCommentService,
   updateQuestionVotesService,
+  addQueBookmarkService,
+  removeQueBookmarkService,
 } from "services";
 
 const initialState = {
@@ -259,6 +261,21 @@ export const updateQuestionVotes = createAsyncThunk(
   }
 );
 
+export const addOrRemoveQueBookmark = createAsyncThunk(
+  "question/addOrRemoveQueBookmark",
+  async ({ questionId, isBookmark }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const { data } = isBookmark
+        ? await addQueBookmarkService(questionId, token)
+        : await removeQueBookmarkService(questionId, token);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const questionSlice = createSlice({
   name: "question",
   initialState,
@@ -440,6 +457,17 @@ const questionSlice = createSlice({
       state.allQuestions = action.payload.questions;
     },
     [updateQuestionVotes.rejected]: (state, action) => {
+      state.questionStatus = "rejected";
+      state.allQuestions = action.payload;
+    },
+    [addOrRemoveQueBookmark.pending]: (state) => {
+      state.questionStatus = "pending";
+    },
+    [addOrRemoveQueBookmark.fulfilled]: (state, action) => {
+      state.questionStatus = "fulfilled";
+      state.allQuestions = action.payload.questions;
+    },
+    [addOrRemoveQueBookmark.rejected]: (state, action) => {
       state.questionStatus = "rejected";
       state.allQuestions = action.payload;
     },

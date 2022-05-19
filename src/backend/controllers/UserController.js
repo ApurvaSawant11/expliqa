@@ -195,3 +195,150 @@ export const unfollowUserHandler = function (schema, request) {
     );
   }
 };
+
+/**
+ * This handler handles adding a post to user's bookmarks in the db.
+ * send POST Request at /api/users/bookmark/:postId/
+ * */
+
+export const bookmarkPostHandler = function (schema, request) {
+  const { postId } = request.params;
+  const post = schema.posts.findBy({ _id: postId }).attrs;
+  const user = requiresAuth.call(this, request);
+  try {
+    if (!user) {
+      return new Response(
+        404,
+        {},
+        {
+          errors: [
+            "The username you entered is not Registered. Not Found error",
+          ],
+        }
+      );
+    }
+    post.bookmark.push(user);
+    this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
+    return new Response(201, {}, { posts: this.db.posts });
+  } catch (error) {
+    return new Response(
+      500,
+      {},
+      {
+        error,
+      }
+    );
+  }
+};
+
+/**
+ * This handler handles adding a post to user's bookmarks in the db.
+ * send POST Request at /api/users/remove-bookmark/:postId/
+ * */
+
+export const removePostFromBookmarkHandler = function (schema, request) {
+  const { postId } = request.params;
+  let user = requiresAuth.call(this, request);
+  let post = schema.posts.findBy({ _id: postId }).attrs;
+
+  try {
+    if (!user) {
+      return new Response(
+        404,
+        {},
+        {
+          errors: [
+            "The username you entered is not Registered. Not Found error",
+          ],
+        }
+      );
+    }
+
+    const filteredBookmarks = post.bookmark.filter(
+      (currPost) => currPost.username !== user.username
+    );
+    this.db.posts.update(
+      { _id: postId },
+      { ...post, bookmark: filteredBookmarks, updatedAt: formatDate() }
+    );
+    return new Response(200, {}, { posts: this.db.posts });
+  } catch (error) {
+    return new Response(
+      500,
+      {},
+      {
+        error,
+      }
+    );
+  }
+};
+
+export const bookmarkQuestionHandler = function (schema, request) {
+  const { questionId } = request.params;
+  const question = schema.questions.findBy({ _id: questionId }).attrs;
+  const user = requiresAuth.call(this, request);
+  try {
+    if (!user) {
+      return new Response(
+        404,
+        {},
+        {
+          errors: [
+            "The username you entered is not Registered. Not Found error",
+          ],
+        }
+      );
+    }
+    question.bookmark.push(user);
+    this.db.questions.update(
+      { _id: questionId },
+      { ...question, updatedAt: formatDate() }
+    );
+    return new Response(201, {}, { questions: this.db.questions });
+  } catch (error) {
+    return new Response(
+      500,
+      {},
+      {
+        error,
+      }
+    );
+  }
+};
+
+export const removeQuestionFromBookmarkHandler = function (schema, request) {
+  const { questionId } = request.params;
+  let user = requiresAuth.call(this, request);
+  let question = schema.questions.findBy({ _id: questionId }).attrs;
+
+  try {
+    if (!user) {
+      return new Response(
+        404,
+        {},
+        {
+          errors: [
+            "The username you entered is not Registered. Not Found error",
+          ],
+        }
+      );
+    }
+
+    const filteredBookmarks = question.bookmark.filter(
+      (currPost) => currPost.username !== user.username
+    );
+    this.db.questions.update(
+      { _id: questionId },
+      { ...question, bookmark: filteredBookmarks, updatedAt: formatDate() }
+    );
+    return new Response(200, {}, { questions: this.db.questions });
+  } catch (error) {
+    return new Response(
+      500,
+      {},
+      {
+        error,
+      }
+    );
+  }
+};

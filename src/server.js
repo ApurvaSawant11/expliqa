@@ -8,6 +8,10 @@ import {
   editUserHandler,
   followUserHandler,
   unfollowUserHandler,
+  bookmarkPostHandler,
+  removePostFromBookmarkHandler,
+  bookmarkQuestionHandler,
+  removeQuestionFromBookmarkHandler,
 } from "./backend/controllers/UserController";
 import { Server, Model, RestSerializer } from "miragejs";
 import { users } from "./backend/db/users";
@@ -104,6 +108,22 @@ export function makeServer({ environment = "development" } = {}) {
       this.post(
         "/users/unfollow/:followUserId/",
         unfollowUserHandler.bind(this)
+      );
+      this.post(
+        "/users/post/bookmark/:postId/",
+        bookmarkPostHandler.bind(this)
+      );
+      this.post(
+        "/users/post/remove-bookmark/:postId/",
+        removePostFromBookmarkHandler.bind(this)
+      );
+      this.post(
+        "/users/question/bookmark/:questionId/",
+        bookmarkQuestionHandler.bind(this)
+      );
+      this.post(
+        "/users/question/remove-bookmark/:questionId/",
+        removeQuestionFromBookmarkHandler.bind(this)
       );
 
       // questions routes (public)

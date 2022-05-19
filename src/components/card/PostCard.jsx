@@ -67,6 +67,17 @@ const PostCard = ({ post }) => {
         </div>
       </div>
 
+      <section className="flex">
+        {post.tags?.map((tag, index) => (
+          <div
+            key={index}
+            className="mr-2 text-blue-700 bg-slate-200 px-1 text-sm rounded-md my-2"
+          >
+            #{tag}
+          </div>
+        ))}
+      </section>
+
       <section
         className="cursor-pointer"
         onClick={() => navigate(`/post/${post._id}`)}
@@ -79,7 +90,7 @@ const PostCard = ({ post }) => {
         </p>
       </section>
 
-      <CardFooter threadId={post._id} threadType="post" />
+      <CardFooter thread={post} threadType="post" />
     </article>
   ) : (
     <></>

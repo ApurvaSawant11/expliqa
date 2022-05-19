@@ -5,6 +5,7 @@ import { openThreadModal } from "components/modal/threadModalSlice";
 import {
   AnswerIcon,
   BookmarkOutlineIcon,
+  BookmarkFillIcon,
   CommentIcon,
   DeleteIcon,
   DownvoteIcon,
@@ -17,6 +18,7 @@ import {
   addQueComment,
   addAnswer,
   updateQuestionVotes,
+  addOrRemoveQueBookmark,
 } from "features/home/questionSlice";
 import { Answer, Comment } from "components";
 
@@ -43,6 +45,9 @@ const SingleQuestion = () => {
         );
     setNewInput("");
   };
+  const isBookmarked = question?.bookmark?.some(
+    (bookmarkPost) => bookmarkPost.username === currentUser.username
+  );
 
   const editHandler = () =>
     dispatch(openThreadModal({ thread: question, tabIndex: 2 }));
@@ -163,7 +168,10 @@ const SingleQuestion = () => {
             </div>
             <div
               className="flex items-center gap-2 cursor-pointer"
-              onClick={() => setShowComponent("comment")}
+              onClick={() => {
+                setShowComponent("comment");
+                setNewInput("");
+              }}
             >
               <CommentIcon size={22} />{" "}
               <span className="text-gray-500 hidden sm:block">Comment</span>
@@ -171,13 +179,30 @@ const SingleQuestion = () => {
 
             <div
               className="flex items-center gap-2 cursor-pointer"
-              onClick={() => setShowComponent("answer")}
+              onClick={() => {
+                setShowComponent("answer");
+                setNewInput("");
+              }}
             >
               <AnswerIcon size={22} />{" "}
               <span className="text-gray-500 hidden sm:block">Answer</span>
             </div>
-            <div className="flex items-center gap-2 cursor-pointer">
-              <BookmarkOutlineIcon size={24} />{" "}
+            <div
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={() =>
+                dispatch(
+                  addOrRemoveQueBookmark({
+                    questionId: question._id,
+                    isBookmark: isBookmarked ? false : true,
+                  })
+                )
+              }
+            >
+              {isBookmarked ? (
+                <BookmarkFillIcon className="text-gray-800" size={24} />
+              ) : (
+                <BookmarkOutlineIcon size={24} />
+              )}{" "}
               <span className="text-gray-500 hidden sm:block">Bookmark</span>
             </div>
           </div>

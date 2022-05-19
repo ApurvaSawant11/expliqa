@@ -1,5 +1,12 @@
 import { useEffect } from "react";
-import { Login, SignUp, Home, SinglePost, SingleQuestion } from "features";
+import {
+  Login,
+  SignUp,
+  Home,
+  SinglePost,
+  SingleQuestion,
+  Bookmarks,
+} from "features";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
@@ -34,6 +41,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/post/:postId" element={<SinglePost />} />
           <Route path="/question/:questionId" element={<SingleQuestion />} />
+          <Route path="/bookmarks" element={<Bookmarks />} />
         </Route>
       </Routes>
       <ThreadModal />

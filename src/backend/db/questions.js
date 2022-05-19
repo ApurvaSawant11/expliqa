@@ -16,6 +16,8 @@ export const questions = [
       upvotedBy: [],
       downvotedBy: [],
     },
+    bookmark: [],
+    tags: ["server"],
     comments: [
       {
         _id: uuid(),
@@ -62,6 +64,8 @@ export const questions = [
       upvotedBy: [],
       downvotedBy: [],
     },
+    bookmark: [],
+    tags: ["ayurveda", "health"],
     comments: [
       {
         _id: uuid(),
