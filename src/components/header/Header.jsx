@@ -53,12 +53,12 @@ const Header = () => {
             className="hover:bg-slate-200 flex items-center gap-4  px-3 py-1 rounded-md cursor-pointer"
             tabIndex="0"
             onClick={() => {
-              navigate("/profile");
+              navigate(`${user.userHandle}`);
               setIsShowDropDown(false);
             }}
             onKeyDown={(event) => {
               if (event.key === "Enter") {
-                navigate("/profile");
+                navigate(`${user.userHandle}`);
                 setIsShowDropDown(false);
               }
             }}

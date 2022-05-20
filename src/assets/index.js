@@ -4,7 +4,11 @@ export { default as benProfilePic } from "./benparker.jpg";
 export { default as luisProfilePic } from "./luisvillasmil.jpg";
 export { default as toaProfilePic } from "./toaheftiba.jpg";
 
-export { AiOutlineClose as CloseIcon } from "react-icons/ai";
+export {
+  AiOutlineClose as CloseIcon,
+  AiFillCamera as CameraIcon,
+  AiFillHome as HomeIcon,
+} from "react-icons/ai";
 export {
   FiEdit as AnswerIcon,
   FiTrendingUp as TrendingIcon,
@@ -27,6 +31,8 @@ export {
   BiDownvote as DownvoteIcon,
   BiUpvote as UpvoteIcon,
   BiComment as CommentIcon,
+  BiUserPlus as FollowIcon,
+  BiUserX as UnfollowIcon,
 } from "react-icons/bi";
 export {
   MdBookmarkBorder as BookmarkOutlineIcon,

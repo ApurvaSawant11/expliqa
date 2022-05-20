@@ -231,6 +231,12 @@ export function makeServer({ environment = "development" } = {}) {
         "/post/comments/downvote/:postId/:commentId",
         downvotePostCommentHandler.bind(this)
       );
+
+      this.passthrough();
+      this.passthrough(
+        "https://api.cloudinary.com/v1_1/dqtzqp7ks/image/upload",
+        ["post"]
+      );
     },
   });
 }
