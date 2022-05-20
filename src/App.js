@@ -12,7 +12,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Header, ThreadModal, RequiresAuth } from "components";
+import { ThreadModal, RequiresAuth } from "components";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "features/userProfile/userSlice";
 import { getAllPosts, getUserPosts } from "features/home/postSlice";
@@ -33,7 +33,6 @@ function App() {
 
   return (
     <div className="App min-h-screen">
-      <Header />
       <ToastContainer position="bottom-right" autoClose="2100" />
       <Routes>
         <Route path="/login" element={<Login />} />

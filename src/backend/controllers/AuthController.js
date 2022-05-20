@@ -40,6 +40,8 @@ export const signupHandler = function (schema, request) {
       following: [],
       link: "",
       bio: "",
+      profilePic:
+        "https://res.cloudinary.com/dqtzqp7ks/image/upload/v1653051156/nw3l2eopse9wrstnfpe3.png",
     };
     const createdUser = schema.users.create(newUser);
     const encodedToken = sign(

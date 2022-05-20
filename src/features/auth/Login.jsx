@@ -46,6 +46,9 @@ export function Login() {
         className="px-10 py-6  form-wrapper bg-white rounded-md shadow-md"
         onSubmit={loginHandler}
       >
+        <h1 className="text-gradient font-bold text-4xl text-center mb-4 cursor-pointer border-b-2 border-blue-200 pb-4">
+          expliqa
+        </h1>
         <h4 className="font-bold uppercase text-center text-2xl">
           <span className="border-b-4 border-green-400 rounded"> Login </span>
         </h4>
