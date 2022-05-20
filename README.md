@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+<div align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Expliqa
 
-## Available Scripts
+A forum app that allows you to share your views via posts and ask questions as well.
 
-In the project directory, you can run:
+<a href="#"><img src="https://img.shields.io/badge/React-273469?style=for-the-badge&logo=react&logoColor=61DAFB" /></a>
+<a href="#"><img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white" /></a>
+<a href="#"><img src="https://img.shields.io/badge/CSS3-f9c22e?style=for-the-badge&logo=css3&logoColor=black" /></a>
+<a href="#"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"/></a>
+<a href="#"><img src="https://img.shields.io/badge/Vercel-252323?style=for-the-badge&logo=vercel&logoColor=white" /></a>
 
-### `yarn start`
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Table of Contents
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [Introduction](#introduction)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Connect](#connect)
 
-### `yarn test`
+## Introduction
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `yarn build`
+- A forum app that allows you to share your views via posts and ask questions as well. User can answer and/or comment on other users posts and question.
+- This website uses [Mockbee](https://mockbee.netlify.app/) for backend.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## **Features -**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Home page / User Feed
+- Add Post with tags
+- Add Edit or Delete comments on the Post
+- Add, Edit or Delete reply on post comments
+- Ask Question with tags
+- Add Edit or Delete your answer on the question
+- Add, Edit or Delete reply on your answer
+- Add Edit or Delete comments on the question
+- Add, Edit or Delete reply on question comments
+- Upvote, Downvote or Unvote threads
+- Search User by Name
+- Filter threads by tags/content
+- Sort threads by latest upload date
+- Single thread page
+- Follow / Unfollow a user
+- Bookmark threads
+- Update user profile
+- Add Comment on video
+- Authentication:
+  - Signup
+  - Login
+- Fully Responsive
 
-### `yarn eject`
+## **Getting started**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. clone the repository on your local machine with the command below in your terminal, and cd into the **expliqa** folder
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+git clone https://github.com/ApurvaSawant11/expliqa.git
+cd expliqa
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+2. install dependencies (if you are using **yarn** then do with that)
 
-## Learn More
+```
+npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. create a `.env` file at the root level of the directory and add secret key like below.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+REACT_APP_JWT_SECRET = <JWT_SECRET_KEY_OF_YOUR_CHOICE>
+```
 
-### Code Splitting
+4. start the server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+npm start
+```
 
-### Analyzing the Bundle Size
+## Connect
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<a href="https://twitter.com/ApurvaSawant11"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white"/></a>
+<a href="https://www.linkedin.com/in/apurvasawant11/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
