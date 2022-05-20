@@ -32,12 +32,12 @@ A forum app that allows you to share your views via posts and ask questions as w
 
 - Home page / User Feed
 - Add Post with tags
-- Add Edit or Delete comments on the Post
+- Add, Edit or Delete comments on the Post
 - Add, Edit or Delete reply on post comments
 - Ask Question with tags
-- Add Edit or Delete your answer on the question
+- Add, Edit or Delete your answer on the question
 - Add, Edit or Delete reply on your answer
-- Add Edit or Delete comments on the question
+- Add, Edit or Delete comments on the question
 - Add, Edit or Delete reply on question comments
 - Upvote, Downvote or Unvote threads
 - Search User by Name
