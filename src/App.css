@@ -6,7 +6,7 @@
     height: calc(100vh - 64px);
 }
   
-.form-wrapper {
+.form-wrapper, .profile-container {
     width: min(90vw, 480px);
 }
 

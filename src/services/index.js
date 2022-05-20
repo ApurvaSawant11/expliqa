@@ -13,7 +13,12 @@ export {
   deleteQuestionService,
   editQuestionService,
 } from "./questionServices";
-export { getAllUsersService } from "./userServices";
+export {
+  getAllUsersService,
+  followUserService,
+  unFollowUserService,
+  updateUserDetailsService,
+} from "./userServices";
 export {
   addQueCommentService,
   editQueCommentService,

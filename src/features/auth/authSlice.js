@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loginUserService, signUpService } from "services";
+import {
+  loginUserService,
+  signUpService,
+  updateUserDetailsService,
+} from "services";
 import { toast } from "react-toastify";
 
 const initialState = {
@@ -30,6 +34,22 @@ export const signUpUser = createAsyncThunk(
         lastName
       );
       return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const updateUserDetails = createAsyncThunk(
+  "auth/updateUserDetails",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("Expliqa_token");
+      const {
+        data: { user },
+      } = await updateUserDetailsService(token, userData);
+      console.log(user);
+      return user;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -82,6 +102,18 @@ const authSlice = createSlice({
       state.authStatus = "Error";
       state.error = action.payload;
       toast.error("Something went wrong!");
+    },
+    [updateUserDetails.pending]: (state) => {
+      state.authStatus = "pending";
+    },
+    [updateUserDetails.fulfilled]: (state, action) => {
+      state.authStatus = "fulfilled";
+      state.user = action.payload;
+      localStorage.setItem("Expliqa_user", JSON.stringify(state.user));
+    },
+    [updateUserDetails.rejected]: (state, action) => {
+      state.authStatus = "Error";
+      state.error = action.payload;
     },
   },
 });

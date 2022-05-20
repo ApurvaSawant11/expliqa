@@ -36,6 +36,10 @@ export const signupHandler = function (schema, request) {
       password,
       ...rest,
       userHandle: username.split("@")[0],
+      followers: [],
+      following: [],
+      link: "",
+      bio: "",
     };
     const createdUser = schema.users.create(newUser);
     const encodedToken = sign(

@@ -6,6 +6,7 @@ import {
   SinglePost,
   SingleQuestion,
   Bookmarks,
+  UserProfile,
 } from "features";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
@@ -31,7 +32,7 @@ function App() {
   }, [token]);
 
   return (
-    <div className="App">
+    <div className="App min-h-screen">
       <Header />
       <ToastContainer position="bottom-right" autoClose="2100" />
       <Routes>
@@ -42,6 +43,7 @@ function App() {
           <Route path="/post/:postId" element={<SinglePost />} />
           <Route path="/question/:questionId" element={<SingleQuestion />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
+          <Route path="/:userHandle" element={<UserProfile />} />
         </Route>
       </Routes>
       <ThreadModal />
