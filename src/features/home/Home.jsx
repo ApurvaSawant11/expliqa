@@ -51,11 +51,11 @@ const Home = () => {
         <section className="mt-7">
           {feedPosts.map((thread) => {
             return (
-              <div className="mt-5">
+              <div className="mt-5" key={thread._id}>
                 {thread.type === "post" ? (
-                  <PostCard post={thread} key={thread._id} />
+                  <PostCard post={thread} />
                 ) : (
-                  <QuestionCard question={thread} key={thread._id} />
+                  <QuestionCard question={thread} />
                 )}
               </div>
             );

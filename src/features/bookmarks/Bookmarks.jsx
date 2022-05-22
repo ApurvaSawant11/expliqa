@@ -11,11 +11,11 @@ const Bookmarks = () => {
   const { allQuestions } = useSelector((state) => state.question);
   const { user } = useSelector((state) => state.auth);
 
-  const [bookmark, setBookmark] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
 
   useEffect(() => {
     if (allPosts.length > 0 && allQuestions.length > 0) {
-      setBookmark(
+      setBookmarks(
         [...allPosts, ...allQuestions].filter(
           (thread) =>
             thread.bookmark.some(
@@ -27,19 +27,23 @@ const Bookmarks = () => {
   }, [user, allPosts, allQuestions]);
 
   return (
-    <div className="min-h-screen py-12 w-11/12 xs:w-4/5 md:w-11/12 lg:w-4/5 xl:w-3/5 m-auto flex flex-col">
-      <h3 className="text-center font-semibold text-2xl my-4">
+    <div className="min-h-screen py-8 w-11/12 xs:w-4/5 md:w-11/12 lg:w-4/5 xl:w-3/5 m-auto flex flex-col">
+      <h3 className="text-center font-semibold text-2xl mb-6">
         <span className="border-b-4 border-green-400 rounded"> Bookmarks </span>
       </h3>
 
       <section>
-        {bookmark.length > 0 ? (
+        {bookmarks.length > 0 ? (
           <>
-            {bookmark.map((thread) => {
-              return thread.type === "post" ? (
-                <PostCard post={thread} key={thread._id} />
-              ) : (
-                <QuestionCard question={thread} key={thread._id} />
+            {bookmarks.map((thread) => {
+              return (
+                <div className="mt-5" key={thread._id}>
+                  {thread.type === "post" ? (
+                    <PostCard post={thread} />
+                  ) : (
+                    <QuestionCard question={thread} />
+                  )}
+                </div>
               );
             })}
           </>
