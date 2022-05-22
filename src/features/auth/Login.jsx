@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "./authSlice";
 import { toast } from "react-toastify";
+import { useDocumentTitle } from "hooks";
 
 export function Login() {
+  useDocumentTitle("Login");
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -19,7 +19,7 @@ const PostCard = ({ post }) => {
     dispatch(openThreadModal({ thread: post, tabIndex: 1 }));
 
   return userDetails ? (
-    <article className="mt-4 p-4 bg-white flex flex-col rounded-md">
+    <article className="p-4 bg-white flex flex-col rounded-md">
       <div className="flex items-center">
         <img
           src={userDetails?.profilePic}

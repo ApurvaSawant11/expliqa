@@ -21,8 +21,11 @@ import {
   addOrRemoveQueBookmark,
 } from "features/home/questionSlice";
 import { Answer, Comment } from "components";
+import { useDocumentTitle, useScrollToTop } from "hooks";
 
 const SingleQuestion = () => {
+  useScrollToTop();
+  useDocumentTitle("Question");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { questionId } = useParams();
@@ -108,7 +111,10 @@ const SingleQuestion = () => {
         </div>
 
         <section>
-          <h3 className="text-xl font-semibold">{question.questionTitle}</h3>
+          <h3 className="text-xl font-semibold">
+            <span className="font-bold">Q. </span>
+            {question.questionTitle}
+          </h3>
           <p className="pt-2 text-gray-600 whitespace-pre-wrap">
             {question.questionContent}
           </p>
@@ -119,7 +125,9 @@ const SingleQuestion = () => {
                 <UpvoteIcon
                   size={22}
                   className={`cursor-pointer ${
-                    question.votes.upvotedBy.includes(currentUser.username)
+                    question.username === currentUser.username
+                      ? "pointer-events-none text-gray-400"
+                      : question.votes.upvotedBy.includes(currentUser.username)
                       ? "text-green-600"
                       : ""
                   }`}
@@ -144,7 +152,11 @@ const SingleQuestion = () => {
                 <DownvoteIcon
                   size={22}
                   className={`cursor-pointer ${
-                    question.votes.downvotedBy.includes(currentUser.username)
+                    question.username === currentUser.username
+                      ? "pointer-events-none text-gray-400"
+                      : question.votes.downvotedBy.includes(
+                          currentUser.username
+                        )
                       ? "text-red-600"
                       : ""
                   }`}
@@ -167,7 +179,9 @@ const SingleQuestion = () => {
               </div>
             </div>
             <div
-              className="flex items-center gap-2 cursor-pointer"
+              className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${
+                showComponent === "comment" ? "bg-green-100" : ""
+              }`}
               onClick={() => {
                 setShowComponent("comment");
                 setNewInput("");
@@ -178,7 +192,9 @@ const SingleQuestion = () => {
             </div>
 
             <div
-              className="flex items-center gap-2 cursor-pointer"
+              className={`flex items-center gap-2 cursor-pointer p-2 rounded-md ${
+                showComponent === "answer" ? "bg-green-100" : ""
+              }`}
               onClick={() => {
                 setShowComponent("answer");
                 setNewInput("");

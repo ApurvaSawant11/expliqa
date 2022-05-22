@@ -8,6 +8,7 @@ import {
   LogoutIcon,
   ProfileIcon,
   SearchIcon,
+  HomeIcon,
 } from "assets";
 import { SearchModal } from "components";
 
@@ -26,15 +27,22 @@ const Header = () => {
         expliqa
       </h1>
 
-      <div className="flex gap-4 xs:text-lg text-2xl">
+      <div className="flex gap-4 xs:text-lg text-2xl cursor-pointer">
+        <div className="flex items-center gap-1" onClick={() => navigate("/")}>
+          <HomeIcon size={22} />
+          <span className="hidden xs:block">Home</span>
+        </div>
         <div
-          className="flex items-center gap-1 cursor-pointer"
+          className="flex items-center gap-1"
           onClick={() => setShowSearchModal(true)}
         >
           <SearchIcon size={18} />
           <span className="hidden xs:block">Search</span>
         </div>
-        <div className="flex items-center gap-1 cursor-pointer">
+        <div
+          className="flex items-center gap-1"
+          onClick={() => navigate("/answer")}
+        >
           <AnswerIcon />
           <span className="hidden xs:block">Answer</span>
         </div>
@@ -42,7 +50,7 @@ const Header = () => {
         <img
           src={user?.profilePic}
           alt={user?.userHandle}
-          className="h-10 w-10 bg-slate-200 rounded-full cursor-pointer"
+          className="h-10 w-10 bg-slate-200 rounded-full"
           onClick={() => setIsShowDropDown(!isShowDropDown)}
         />
       </div>

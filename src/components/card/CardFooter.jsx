@@ -89,7 +89,9 @@ const CardFooter = ({ thread, threadType }) => {
           <UpvoteIcon
             size={22}
             className={`cursor-pointer ${
-              thread.votes.upvotedBy.includes(currentUser.username)
+              thread.username === currentUser.username
+                ? "pointer-events-none text-gray-400"
+                : thread.votes.upvotedBy.includes(currentUser.username)
                 ? "text-green-600"
                 : ""
             }`}
@@ -101,7 +103,9 @@ const CardFooter = ({ thread, threadType }) => {
           <DownvoteIcon
             size={22}
             className={`cursor-pointer ${
-              thread.votes.downvotedBy.includes(currentUser.username)
+              thread.username === currentUser.username
+                ? "pointer-events-none text-gray-400"
+                : thread.votes.downvotedBy.includes(currentUser.username)
                 ? "text-red-600"
                 : ""
             }`}

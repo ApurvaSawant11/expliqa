@@ -121,7 +121,7 @@ const FilterBar = ({ setFeedPosts }) => {
           <select
             name="sort"
             id="sort"
-            className="outline-none w-[6rem]"
+            className="outline-none"
             value={sortCategory}
             onChange={(e) => {
               setSortCategory(e.target.value);
