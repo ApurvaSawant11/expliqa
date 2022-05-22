@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { useDocumentTitle, useScrollToTop } from "hooks";
 
 const Home = () => {
-  useScrollToTop();
   useDocumentTitle("Home");
   const navigate = useNavigate();
   const dispatch = useDispatch();
