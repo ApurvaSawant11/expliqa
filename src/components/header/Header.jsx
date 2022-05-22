@@ -39,7 +39,10 @@ const Header = () => {
           <SearchIcon size={18} />
           <span className="hidden xs:block">Search</span>
         </div>
-        <div className="flex items-center gap-1">
+        <div
+          className="flex items-center gap-1"
+          onClick={() => navigate("/answer")}
+        >
           <AnswerIcon />
           <span className="hidden xs:block">Answer</span>
         </div>

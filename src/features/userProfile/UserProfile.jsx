@@ -11,10 +11,12 @@ import {
   PostCard,
   QuestionCard,
 } from "components/index.js";
-import { FollowIcon, PostIcon, ProfileIcon, UnfollowIcon } from "assets";
-import { updateUserDetails } from "features/auth/authSlice.js";
+import { FollowIcon, PostIcon, UnfollowIcon } from "assets";
+import { useScrollToTop } from "hooks/useScrollToTop.js";
+import { useDocumentTitle } from "hooks/useDocumentTitle.js";
 
 const UserProfile = () => {
+  useScrollToTop();
   const checkActive = (index, className) =>
     activeIndex === index ? className : "border-b-2 border-gray-300";
   const [activeIndex, setActiveIndex] = useState(1);
@@ -30,6 +32,13 @@ const UserProfile = () => {
   const [userAnswers, setUserAnswers] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
 
+  useDocumentTitle(
+    `${
+      selectedUser?.firstName !== undefined
+        ? `${selectedUser.firstName} ${selectedUser.lastName}`
+        : "Profile"
+    }`
+  );
   useEffect(() => {
     setSingleUser(allUsers.find((user) => user.userHandle === userHandle));
   }, [allUsers, userHandle]);
@@ -40,7 +49,7 @@ const UserProfile = () => {
     setUserAnswers(
       allQuestions.filter((question) =>
         question.answers.find(
-          (answer) => answer.username === selectedUser.username
+          (answer) => answer.username === selectedUser?.username
         )
       )
     );
@@ -157,23 +166,19 @@ const UserProfile = () => {
         <div className="flex flex-col">
           {activeIndex === 1
             ? userPosts.map((post) => (
-                <div className="border-b-2">
-                  <PostCard key={post._id} post={post} />
+                <div className="border-b-2" key={post._id}>
+                  <PostCard post={post} />
                 </div>
               ))
             : activeIndex === 2
             ? userQuestions.map((question) => (
-                <div className="border-b-2">
-                  <QuestionCard key={question._id} question={question} />
+                <div className="border-b-2" key={question._id}>
+                  <QuestionCard question={question} />
                 </div>
               ))
             : userAnswers.map((question) => (
-                <div className="border-b-2">
-                  <AnswerCard
-                    key={question._id}
-                    question={question}
-                    answerUser={selectedUser}
-                  />
+                <div className="border-b-2" key={question._id}>
+                  <AnswerCard question={question} answerUser={selectedUser} />
                 </div>
               ))}
         </div>

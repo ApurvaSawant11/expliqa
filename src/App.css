@@ -10,6 +10,10 @@
     width: min(90vw, 480px);
 }
 
+.answer-container {
+    width: min(90vw, 50rem);
+}
+
 .text-gradient{
     background: linear-gradient(180deg, #08AEEA 0%, #2AF598 100%);
     -webkit-background-clip: text;

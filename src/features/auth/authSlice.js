@@ -48,7 +48,6 @@ export const updateUserDetails = createAsyncThunk(
       const {
         data: { user },
       } = await updateUserDetailsService(token, userData);
-      console.log(user);
       return user;
     } catch (error) {
       return rejectWithValue(error);

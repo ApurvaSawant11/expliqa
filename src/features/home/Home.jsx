@@ -4,8 +4,11 @@ import { useDispatch } from "react-redux";
 import { FilterBar, FollowBar, PostCard, QuestionCard } from "components";
 import { AnswerIcon, AskIcon, PostIcon } from "assets";
 import { useNavigate } from "react-router-dom";
+import { useDocumentTitle, useScrollToTop } from "hooks";
 
 const Home = () => {
+  useScrollToTop();
+  useDocumentTitle("Home");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [feedPosts, setFeedPosts] = useState([]);

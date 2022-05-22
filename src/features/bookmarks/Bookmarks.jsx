@@ -1,9 +1,12 @@
 import { PostCard, QuestionCard } from "components";
+import { useDocumentTitle, useScrollToTop } from "hooks";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const Bookmarks = () => {
+  useScrollToTop();
+  useDocumentTitle("Bookmarks");
   const { allPosts } = useSelector((state) => state.post);
   const { allQuestions } = useSelector((state) => state.question);
   const { user } = useSelector((state) => state.auth);

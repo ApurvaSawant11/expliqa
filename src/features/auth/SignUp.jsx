@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "./authSlice";
+import { useDocumentTitle } from "hooks";
 
 export function SignUp() {
+  useDocumentTitle("Signup");
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
