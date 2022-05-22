@@ -7,6 +7,7 @@ import {
   SingleQuestion,
   Bookmarks,
   UserProfile,
+  AnswerPage,
 } from "features";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
@@ -43,6 +44,7 @@ function App() {
           <Route path="/question/:questionId" element={<SingleQuestion />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
           <Route path="/:userHandle" element={<UserProfile />} />
+          <Route path="/answer" element={<AnswerPage />} />
         </Route>
       </Routes>
       <ThreadModal />

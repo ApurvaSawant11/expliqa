@@ -5,8 +5,11 @@ import { openThreadModal } from "components/modal/threadModalSlice";
 import { DeleteIcon, MoreIcon, PostIcon } from "assets";
 import { deletePost, addPostComment } from "features/home/postSlice";
 import { CardFooter, Comment } from "components";
+import { useDocumentTitle, useScrollToTop } from "hooks";
 
 const SinglePost = () => {
+  useScrollToTop();
+  useDocumentTitle("Post");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { postId } = useParams();

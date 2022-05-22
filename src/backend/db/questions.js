@@ -9,15 +9,16 @@ export const questions = [
   {
     _id: uuid(),
     type: "question",
-    username: "adarshbalika@gmail.com",
-    questionTitle: "Why to use Server Side Rendering?",
+    username: "What kind of molecule is UM171?",
+    questionTitle:
+      "Why are cryptocurrency profits to be taxed at 30% in India?",
     questionContent: "I am Detailed Description about the Question.",
     votes: {
       upvotedBy: [],
       downvotedBy: [],
     },
     bookmark: [],
-    tags: ["server"],
+    tags: ["molecule", "chemistry"],
     comments: [
       {
         _id: uuid(),
@@ -35,7 +36,7 @@ export const questions = [
         _id: uuid(),
         username: "apurvasawant@gmail.com",
         answerText:
-          "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+          "Taxing a crypto transaction legitimizes it, however, our new crypto tax regime also tends to create more questions than answers. As of present, India lacks a legislative framework to oversee crypto transactions; we can only tax on the basis of PAN card tracking. Any crypto transaction may be seen from two perspectives: income and expenditure. As such the 30% tax slab has been set in accordance with the Income Tax Act, 1961",
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -61,7 +62,7 @@ export const questions = [
     questionContent:
       "Our bodies use around 75 percent of our energy to digest the food. This means that we have only around 25 percent energy for other activities, including intellectual. I want to know how we can work at our best by consuming appropriate diet",
     votes: {
-      upvotedBy: [],
+      upvotedBy: ["adarshbalika@gmail.com"],
       downvotedBy: [],
     },
     bookmark: [],
@@ -93,6 +94,49 @@ export const questions = [
             _id: uuid(),
             username: "apurvasawant@gmail.com",
             commentData: "Thanks for the answer!",
+          },
+        ],
+      },
+    ],
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
+
+  {
+    _id: uuid(),
+    type: "question",
+    username: "luisvillasmil@gmail.com",
+    questionTitle: "What is the easiest good to cook for breakfast?",
+    questionContent:
+      "I am looking for something that can be cooked within 25 minutes.",
+    votes: {
+      upvotedBy: ["adarshbalika@gmail.com"],
+      downvotedBy: [],
+    },
+    bookmark: [],
+    tags: ["ayurveda", "health"],
+    comments: [
+      {
+        _id: uuid(),
+        username: "toaheftiba@gmail.com",
+        commentData: "Yummy",
+      },
+    ],
+    answers: [
+      {
+        _id: uuid(),
+        username: "benparker@gmail.com",
+        answerText:
+          "Hot flat pan, 5 slices of bacon, an egg opened on them. Move. Upside down, 3 minutes again. Add two toasted bread slices. Some black, chilled, red, whatever beans. Or do it the Italian way: cappuccino and cream or jam or chocholate filled brioche.",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+        comments: [
+          {
+            _id: uuid(),
+            username: "luisvillasmil@gmail.com",
+            commentData: "This sounds easy and delicious!",
           },
         ],
       },

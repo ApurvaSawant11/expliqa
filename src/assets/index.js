@@ -7,7 +7,7 @@ export { default as toaProfilePic } from "./toaheftiba.jpg";
 export {
   AiOutlineClose as CloseIcon,
   AiFillCamera as CameraIcon,
-  AiFillHome as HomeIcon,
+  AiOutlineHome as HomeIcon,
 } from "react-icons/ai";
 export {
   FiEdit as AnswerIcon,

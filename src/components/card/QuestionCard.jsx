@@ -19,7 +19,7 @@ const QuestionCard = ({ question }) => {
     dispatch(openThreadModal({ thread: question, tabIndex: 2 }));
 
   return userDetails ? (
-    <article className="mt-4 p-4 bg-white flex flex-col rounded-md">
+    <article className="p-4 bg-white flex flex-col rounded-md">
       <div className="flex items-center">
         <img
           src={userDetails?.profilePic}

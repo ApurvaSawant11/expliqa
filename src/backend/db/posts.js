@@ -38,11 +38,11 @@ export const posts = [
   {
     _id: uuid(),
     type: "post",
-    postTitle: "Notorious job-interview questions",
+    postTitle: "Best books you'll ever read",
     postContent:
-      "“Where do you see yourself in five years?” \n\nIt’s one of the notorious job-interview questions of our time, isn’t it? And a valuable one, as human resources professionals seek to evaluate candidates’ thoughtfulness and ambition. ",
+      "“To get the most out of books should you read every book once, or read the best books 10x?”This is a question I often ask myself.\nWith so many books out there, what are the best books you should read to improve your life?\nI can tell you 10 books that have greatly improved my life.\nAnd, if you read them, I suspect they may improve your life as well.\n\n1. CAN’T HURT ME By David Goggins\n2. TUESDAYS WITH MORRIE By Mitch Albom\n3. ATOMIC HABITS By James Clear\n4. EGO IS THE ENEMY By Ryan Holiday",
     votes: {
-      upvotedBy: [],
+      upvotedBy: ["adarshbalika@gmail.com"],
       downvotedBy: [],
     },
     bookmark: [],
@@ -54,7 +54,7 @@ export const posts = [
       {
         _id: uuid(),
         username: "adarshbalika@gmail.com",
-        commentData: "Would love to here more!",
+        commentData: "These are really great suggestions!",
         votes: {
           upvotedBy: [],
           downvotedBy: [],

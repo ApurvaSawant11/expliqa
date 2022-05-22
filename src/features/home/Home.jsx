@@ -4,14 +4,16 @@ import { useDispatch } from "react-redux";
 import { FilterBar, FollowBar, PostCard, QuestionCard } from "components";
 import { AnswerIcon, AskIcon, PostIcon } from "assets";
 import { useNavigate } from "react-router-dom";
+import { useDocumentTitle, useScrollToTop } from "hooks";
 
 const Home = () => {
+  useDocumentTitle("Home");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [feedPosts, setFeedPosts] = useState([]);
 
   return (
-    <main className="min-h-screen py-12 w-11/12 xs:w-4/5 md:w-11/12 lg:w-4/5 xl:w-3/5 m-auto flex">
+    <main className="min-h-screen py-12 w-full xs:w-4/5 md:w-11/12 lg:w-4/5 xl:w-3/5 m-auto flex">
       <div className="basis-full">
         <section className="bg-white p-2 pt-4 rounded-md mb-7">
           <div
@@ -48,10 +50,14 @@ const Home = () => {
 
         <section className="mt-7">
           {feedPosts.map((thread) => {
-            return thread.type === "post" ? (
-              <PostCard post={thread} key={thread._id} />
-            ) : (
-              <QuestionCard question={thread} key={thread._id} />
+            return (
+              <div className="mt-5" key={thread._id}>
+                {thread.type === "post" ? (
+                  <PostCard post={thread} />
+                ) : (
+                  <QuestionCard question={thread} />
+                )}
+              </div>
             );
           })}
         </section>
