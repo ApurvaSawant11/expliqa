@@ -61,7 +61,7 @@ export const questions = [
     questionContent:
       "Our bodies use around 75 percent of our energy to digest the food. This means that we have only around 25 percent energy for other activities, including intellectual. I want to know how we can work at our best by consuming appropriate diet",
     votes: {
-      upvotedBy: [],
+      upvotedBy: ["adarshbalika@gmail.com"],
       downvotedBy: [],
     },
     bookmark: [],

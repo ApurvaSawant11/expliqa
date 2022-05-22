@@ -142,7 +142,7 @@ const ThreadModal = () => {
                     }
                   />
                   <TextareaAutosize
-                    className="resize-none p-2 w-full focus:outline-none border-b-2 border-gray-300"
+                    className="resize-none p-2 w-full focus:outline-none"
                     minRows={8}
                     maxRows={8}
                     placeholder="Write something awesome..."
@@ -154,7 +154,9 @@ const ThreadModal = () => {
                       })
                     }
                   />
-                  <span className="text-gray-400">Add upto 5 tags below:</span>
+                  <span className="text-gray-400">
+                    Type and Enter to add upto 5 tags
+                  </span>
                   <ThreadTags
                     threadTags={postInput.tags}
                     setThreadInput={setPostInput}
@@ -173,7 +175,7 @@ const ThreadModal = () => {
                   <button
                     className={`font-semibold bg-blue-500 text-white px-3 rounded-md hover:bg-blue-600 ${
                       postInput?.postContent?.length < 10 &&
-                      "hover:cursor-not-allowed hover:bg-gray-400"
+                      "hover:cursor-not-allowed bg-gray-400 hover:bg-gray-400"
                     }`}
                     disabled={
                       postInput?.postContent?.trim().length < 10 ? true : false
@@ -199,7 +201,7 @@ const ThreadModal = () => {
                     }
                   />
                   <TextareaAutosize
-                    className="resize-none p-2 w-full focus:outline-none border-b-2 border-gray-300"
+                    className="resize-none p-2 w-full focus:outline-none"
                     minRows={8}
                     maxRows={8}
                     placeholder="Question description"
@@ -211,7 +213,9 @@ const ThreadModal = () => {
                       })
                     }
                   />
-                  <span className="text-gray-400">Add upto 5 tags below:</span>
+                  <span className="text-gray-400">
+                    Type and Enter to add upto 5 tags
+                  </span>
                   <ThreadTags
                     threadTags={questionInput.tags}
                     setThreadInput={setQuestionInput}
@@ -230,7 +234,7 @@ const ThreadModal = () => {
                   <button
                     className={`font-semibold bg-blue-500 text-white px-3 rounded-md hover:bg-blue-600 ${
                       questionInput?.questionContent?.length < 10 &&
-                      "hover:cursor-not-allowed hover:bg-gray-400"
+                      "hover:cursor-not-allowed bg-gray-400 hover:bg-gray-400"
                     }`}
                     disabled={
                       questionInput?.questionContent?.trim().length < 10

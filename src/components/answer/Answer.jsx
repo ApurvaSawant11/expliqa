@@ -154,7 +154,7 @@ const Answer = ({ answer, threadId }) => {
               </button>
             </div>
           )}
-          <div className="flex flex-col-reverse gap-4 ml-4 mt-4">
+          <div className="flex flex-col gap-4 ml-4 mt-4">
             {answer.comments.length > 0 &&
               answer.comments.map((comment) => (
                 <Comment

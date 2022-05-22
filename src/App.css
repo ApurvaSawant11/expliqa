@@ -16,9 +16,11 @@
     -webkit-text-fill-color: transparent;
 }
 
+/* Note: !important is used to overwrite react-chip-input default styles */
+
 .styles_chip-input__3aumB .styles_chip__i-PT7 {
-    background-color: #22c55e;
-    border: none;
+    background-color: #22c55e !important;
+    border: none !important;
     color: #ffffff;
     width: max-content;
     display: flex;
@@ -26,13 +28,20 @@
     justify-content: center;
 }
   
+.form-control::placeholder {
+    color: transparent !important;
+}
+
+.form-control:-ms-input-placeholder{
+    color: transparent !important;
+}
+
+.form-control::-ms-input-placeholder{
+    color: transparent !important;
+}
 
 .styles_chip-input__3aumB {
     margin-top:5px
-}
-
-.styles_chip-input__3aumB .styles_chip__i-PT7:hover {
-    background-color: #1abd55
 }
 
 .styles_chip-input__3aumB .no-gutters{
@@ -58,8 +67,4 @@ input[name="chipInput"] {
 
 .styles_cursor-pointer__2Jvz5 {
     margin:0;
-}
-
-.filter-input input[name="chipInput"] {
-    padding: 5px 1rem;
 }

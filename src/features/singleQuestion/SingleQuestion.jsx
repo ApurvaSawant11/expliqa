@@ -119,7 +119,9 @@ const SingleQuestion = () => {
                 <UpvoteIcon
                   size={22}
                   className={`cursor-pointer ${
-                    question.votes.upvotedBy.includes(currentUser.username)
+                    question.username === currentUser.username
+                      ? "pointer-events-none text-gray-400"
+                      : question.votes.upvotedBy.includes(currentUser.username)
                       ? "text-green-600"
                       : ""
                   }`}
@@ -144,7 +146,11 @@ const SingleQuestion = () => {
                 <DownvoteIcon
                   size={22}
                   className={`cursor-pointer ${
-                    question.votes.downvotedBy.includes(currentUser.username)
+                    question.username === currentUser.username
+                      ? "pointer-events-none text-gray-400"
+                      : question.votes.downvotedBy.includes(
+                          currentUser.username
+                        )
                       ? "text-red-600"
                       : ""
                   }`}

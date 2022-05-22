@@ -32,6 +32,11 @@ const UserProfile = () => {
 
   useEffect(() => {
     setSingleUser(allUsers.find((user) => user.userHandle === userHandle));
+  }, [allUsers, userHandle]);
+
+  useEffect(() => {
+    dispatch(getUserPosts(selectedUser?.username));
+    dispatch(getUserQuestions(selectedUser?.username));
     setUserAnswers(
       allQuestions.filter((question) =>
         question.answers.find(
@@ -39,11 +44,6 @@ const UserProfile = () => {
         )
       )
     );
-  }, [allUsers, userHandle]);
-
-  useEffect(() => {
-    dispatch(getUserPosts(selectedUser?.username));
-    dispatch(getUserQuestions(selectedUser?.username));
   }, [selectedUser, allPosts, allQuestions]);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const UserProfile = () => {
 
   return selectedUser?.username ? (
     <div className="min-h-screen py-12 w-11/12 xs:w-4/5 md:w-11/12 lg:w-4/5 xl:w-3/5 m-auto flex">
-      <div className="bg-white h-max">
+      <div className="bg-white h-max rounded-md">
         <div className="flex items-start p-4 rounded-md gap-4 flex-wrap">
           <img
             src={selectedUser.profilePic}
@@ -154,19 +154,27 @@ const UserProfile = () => {
             </button>
           </div>
         </div>
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col">
           {activeIndex === 1
-            ? userPosts.map((post) => <PostCard key={post._id} post={post} />)
+            ? userPosts.map((post) => (
+                <div className="border-b-2">
+                  <PostCard key={post._id} post={post} />
+                </div>
+              ))
             : activeIndex === 2
             ? userQuestions.map((question) => (
-                <QuestionCard key={question._id} question={question} />
+                <div className="border-b-2">
+                  <QuestionCard key={question._id} question={question} />
+                </div>
               ))
             : userAnswers.map((question) => (
-                <AnswerCard
-                  key={question._id}
-                  question={question}
-                  answerUser={selectedUser}
-                />
+                <div className="border-b-2">
+                  <AnswerCard
+                    key={question._id}
+                    question={question}
+                    answerUser={selectedUser}
+                  />
+                </div>
               ))}
         </div>
       </div>

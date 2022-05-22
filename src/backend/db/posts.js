@@ -42,7 +42,7 @@ export const posts = [
     postContent:
       "“Where do you see yourself in five years?” \n\nIt’s one of the notorious job-interview questions of our time, isn’t it? And a valuable one, as human resources professionals seek to evaluate candidates’ thoughtfulness and ambition. ",
     votes: {
-      upvotedBy: [],
+      upvotedBy: ["adarshbalika@gmail.com"],
       downvotedBy: [],
     },
     bookmark: [],
