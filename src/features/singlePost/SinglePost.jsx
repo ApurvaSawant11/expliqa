@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { openThreadModal } from "components/modal/threadModalSlice";
+import { openThreadModal } from "components/modal/threadModal/threadModalSlice";
 import { DeleteIcon, MoreIcon, PostIcon } from "assets";
 import { deletePost, addPostComment } from "features/home/postSlice";
 import { CardFooter, Comment } from "components";

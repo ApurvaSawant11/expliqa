@@ -1,6 +1,6 @@
 export { RequiresAuth } from "./requiresAuth/RequiresAuth";
 export { Header } from "./header/Header";
-export { ThreadModal } from "./modal/ThreadModal";
+export { ThreadModal } from "./modal/threadModal/ThreadModal";
 export { FollowBar } from "./followBar/FollowBar";
 export { PostCard } from "./card/PostCard";
 export { QuestionCard } from "./card/QuestionCard";
@@ -11,3 +11,4 @@ export { FilterBar } from "./filterBar/FilterBar";
 export { SearchModal } from "./modal/searchModal/SearchModal";
 export { EditProfileModal } from "./modal/editProfileModal/EditProfileModal";
 export { AnswerCard } from "./card/AnswerCard";
+export { Loader } from "./loader/Loader";

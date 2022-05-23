@@ -1,16 +1,28 @@
-import React, { useState } from "react";
-import { openThreadModal } from "components/modal/threadModalSlice";
-import { useDispatch } from "react-redux";
-import { FilterBar, FollowBar, PostCard, QuestionCard } from "components";
+import React, { useState, useEffect } from "react";
+import { openThreadModal } from "components/modal/threadModal/threadModalSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  FilterBar,
+  FollowBar,
+  Loader,
+  PostCard,
+  QuestionCard,
+} from "components";
 import { AnswerIcon, AskIcon, PostIcon } from "assets";
 import { useNavigate } from "react-router-dom";
-import { useDocumentTitle, useScrollToTop } from "hooks";
+import { useDocumentTitle } from "hooks";
+import { closeLoader, openLoader } from "components/loader/loaderSlice.js";
 
 const Home = () => {
   useDocumentTitle("Home");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [feedPosts, setFeedPosts] = useState([]);
+  const { loader } = useSelector((state) => state.loader);
+  useEffect(() => {
+    dispatch(openLoader());
+    setTimeout(() => dispatch(closeLoader()), 800);
+  }, []);
 
   return (
     <main className="min-h-screen py-12 w-full xs:w-4/5 md:w-11/12 lg:w-4/5 xl:w-3/5 m-auto flex">
@@ -48,19 +60,23 @@ const Home = () => {
 
         <FilterBar setFeedPosts={setFeedPosts} />
 
-        <section className="mt-7">
-          {feedPosts.map((thread) => {
-            return (
-              <div className="mt-5" key={thread._id}>
-                {thread.type === "post" ? (
-                  <PostCard post={thread} />
-                ) : (
-                  <QuestionCard question={thread} />
-                )}
-              </div>
-            );
-          })}
-        </section>
+        {loader ? (
+          <Loader />
+        ) : (
+          <section className="mt-7">
+            {feedPosts.map((thread) => {
+              return (
+                <div className="mt-5" key={thread._id}>
+                  {thread.type === "post" ? (
+                    <PostCard post={thread} />
+                  ) : (
+                    <QuestionCard question={thread} />
+                  )}
+                </div>
+              );
+            })}
+          </section>
+        )}
       </div>
       <FollowBar />
     </main>
