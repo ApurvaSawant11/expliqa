@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "features/auth/authSlice";
-import threadModalReducer from "components/modal/threadModalSlice";
+import threadModalReducer from "components/modal/threadModal/threadModalSlice";
 import postReducer from "features/home/postSlice";
 import questionReducer from "features/home/questionSlice";
 import userReducer from "features/userProfile/userSlice";

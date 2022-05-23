@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { openThreadModal } from "components/modal/threadModalSlice";
+import { openThreadModal } from "components/modal/threadModal/threadModalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import {
   FilterBar,
