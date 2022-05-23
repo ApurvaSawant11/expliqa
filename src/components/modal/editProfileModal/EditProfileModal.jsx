@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUserDetails } from "features/auth/authSlice";
 import { toast } from "react-toastify";
 import TextareaAutosize from "react-textarea-autosize";
+import { getAllUsers } from "features/userProfile/userSlice";
 
 const EditProfileModal = ({ setShowEditModal }) => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const EditProfileModal = ({ setShowEditModal }) => {
     dispatch(updateUserDetails({ ...userForm }));
     setShowEditModal(false);
     toast.success("User details updated!");
+    dispatch(getAllUsers());
   };
 
   useEffect(() => {
@@ -22,6 +24,7 @@ const EditProfileModal = ({ setShowEditModal }) => {
 
   const updateImageHandler = async (image) => {
     try {
+      const toastId = toast.info("Uploading image", { autoClose: false });
       const data = new FormData();
       data.append("file", image);
       data.append("upload_preset", "lldan9bz");
@@ -36,8 +39,8 @@ const EditProfileModal = ({ setShowEditModal }) => {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log("----", data, data.url);
           setUserForm({ ...userForm, profilePic: data.url });
+          toast.dismiss(toastId);
         })
         .catch((error) => {
           console.error(error);

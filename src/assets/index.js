@@ -3,6 +3,7 @@ export { default as balikaProfilePic } from "./adarshbalika.jpg";
 export { default as benProfilePic } from "./benparker.jpg";
 export { default as luisProfilePic } from "./luisvillasmil.jpg";
 export { default as toaProfilePic } from "./toaheftiba.jpg";
+export { default as loader } from "./loader.svg";
 
 export {
   AiOutlineClose as CloseIcon,

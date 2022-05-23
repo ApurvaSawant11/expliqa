@@ -9,7 +9,7 @@ export const questions = [
   {
     _id: uuid(),
     type: "question",
-    username: "What kind of molecule is UM171?",
+    username: "adarshbalika@gmail.com",
     questionTitle:
       "Why are cryptocurrency profits to be taxed at 30% in India?",
     questionContent: "I am Detailed Description about the Question.",

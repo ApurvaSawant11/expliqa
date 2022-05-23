@@ -11,3 +11,4 @@ export { FilterBar } from "./filterBar/FilterBar";
 export { SearchModal } from "./modal/searchModal/SearchModal";
 export { EditProfileModal } from "./modal/editProfileModal/EditProfileModal";
 export { AnswerCard } from "./card/AnswerCard";
+export { Loader } from "./loader/Loader";

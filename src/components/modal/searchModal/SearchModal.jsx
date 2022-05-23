@@ -51,6 +51,7 @@ const SearchModal = ({ setShowSearchModal }) => {
             {filteredUsers?.map((user) => (
               <div
                 className="flex items-center cursor-pointer p-4"
+                key={user._id}
                 onClick={() => {
                   navigate(`/${user.userHandle}`);
                   setShowSearchModal(false);
