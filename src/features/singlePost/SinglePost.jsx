@@ -141,4 +141,4 @@ const SinglePost = () => {
   );
 };
 
-export { SinglePost };
+export default SinglePost;

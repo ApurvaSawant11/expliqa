@@ -6,7 +6,7 @@ import { loginUser } from "./authSlice";
 import { toast } from "react-toastify";
 import { useDocumentTitle } from "hooks";
 
-export function Login() {
+const Login = () => {
   useDocumentTitle("Login");
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -48,9 +48,14 @@ export function Login() {
         className="px-10 py-6  form-wrapper bg-white rounded-md shadow-md"
         onSubmit={loginHandler}
       >
-        <h1 className="text-gradient font-bold text-4xl text-center mb-4 cursor-pointer border-b-2 border-blue-200 pb-4">
-          expliqa
-        </h1>
+        <div className="pb-4 mb-4 border-b-2 border-blue-200">
+          <h1 className="text-gradient font-bold text-4xl text-center pb-2 cursor-pointer ">
+            expliqa
+          </h1>
+          <div className="font-semibold text-center">
+            A forum platform to gain and share knowledge
+          </div>
+        </div>
         <h4 className="font-bold uppercase text-center text-2xl">
           <span className="border-b-4 border-green-400 rounded"> Login </span>
         </h4>
@@ -102,4 +107,6 @@ export function Login() {
       </form>
     </main>
   );
-}
+};
+
+export default Login;

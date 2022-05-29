@@ -57,4 +57,4 @@ const Bookmarks = () => {
   );
 };
 
-export { Bookmarks };
+export default Bookmarks;

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signUpUser } from "./authSlice";
 import { useDocumentTitle } from "hooks";
 
-export function SignUp() {
+const SignUp = () => {
   useDocumentTitle("Signup");
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -44,12 +44,17 @@ export function SignUp() {
   return (
     <main className="main-container w-full text-gray-800 px-4 py-6 flex items-center justify-center">
       <form
-        className="px-10 py-6  form-wrapper bg-white rounded-md shadow-md"
+        className="px-10 py-6  form-wrapper bg-white rounded-md shadow-md mt-4"
         onSubmit={signUpHandler}
       >
-        <h1 className="text-gradient font-bold text-4xl text-center mb-4 cursor-pointer border-b-2 border-blue-200 pb-4">
-          expliqa
-        </h1>
+        <div className="pb-4 mb-4 border-b-2 border-blue-200">
+          <h1 className="text-gradient font-bold text-4xl text-center pb-2 cursor-pointer ">
+            expliqa
+          </h1>
+          <div className="font-semibold text-center">
+            A forum platform to gain and share knowledge
+          </div>
+        </div>
         <h4 className="font-bold uppercase text-center text-2xl">
           <span className="border-b-4 border-green-400 rounded"> Sign Up </span>
         </h4>
@@ -115,4 +120,6 @@ export function SignUp() {
       </form>
     </main>
   );
-}
+};
+
+export default SignUp;

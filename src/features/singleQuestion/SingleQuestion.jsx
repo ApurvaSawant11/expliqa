@@ -295,4 +295,4 @@ const SingleQuestion = () => {
   );
 };
 
-export { SingleQuestion };
+export default SingleQuestion;

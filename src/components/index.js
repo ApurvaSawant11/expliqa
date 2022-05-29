@@ -1,4 +1,3 @@
-export { RequiresAuth } from "./requiresAuth/RequiresAuth";
 export { Header } from "./header/Header";
 export { ThreadModal } from "./modal/threadModal/ThreadModal";
 export { FollowBar } from "./followBar/FollowBar";
