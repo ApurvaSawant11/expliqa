@@ -1,4 +1,3 @@
-export { RequiresAuth } from "./requiresAuth/RequiresAuth";
 export { Header } from "./header/Header";
 export { ThreadModal } from "./modal/threadModal/ThreadModal";
 export { FollowBar } from "./followBar/FollowBar";
@@ -12,3 +11,4 @@ export { SearchModal } from "./modal/searchModal/SearchModal";
 export { EditProfileModal } from "./modal/editProfileModal/EditProfileModal";
 export { AnswerCard } from "./card/AnswerCard";
 export { Loader } from "./loader/Loader";
+export { UsersListModal } from "./modal/usersListModal/UsersListModal";

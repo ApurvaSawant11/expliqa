@@ -12,6 +12,7 @@ const FilterBar = ({ setFeedPosts }) => {
   const [sortCategory, setSortCategory] = useState("none");
   const [filterCategory, setFilterCategory] = useState("none");
   const [filterInput, setFilterInput] = useState("");
+  const [showTrending, setShowTrending] = useState(false);
 
   useEffect(() => {
     if (filterCategory !== "none") {
@@ -39,6 +40,10 @@ const FilterBar = ({ setFeedPosts }) => {
   useEffect(() => {
     sortCategory === "most-upvotes" ? sortByUpvotes() : sortByLatest();
   }, [sortCategory]);
+
+  useEffect(() => {
+    showTrending ? trendingHandler() : sortByLatest();
+  }, [showTrending]);
 
   const sortByUpvotes = () => {
     setFeedPosts(
@@ -79,7 +84,9 @@ const FilterBar = ({ setFeedPosts }) => {
   const trendingHandler = () => {
     setFeedPosts(
       [...allPosts, ...allQuestions]?.sort(
-        (a, b) => b.votes.upvotedBy.length - a.votes.upvotedBy.length
+        (a, b) =>
+          b.votes.upvotedBy.length - a.votes.upvotedBy.length ||
+          b.comments.length - a.comments.length
       )
     );
   };
@@ -91,8 +98,10 @@ const FilterBar = ({ setFeedPosts }) => {
        py-2 rounded-md mb-2"
       >
         <button
-          className="flex items-center justify-center gap-1 basis-full"
-          onClick={trendingHandler}
+          className={`flex items-center justify-center gap-1 basis-full ${
+            showTrending ? "text-green-600 font-bold" : ""
+          }`}
+          onClick={() => setShowTrending(!showTrending)}
         >
           <FireIcon size={20} className="text-orange-500" /> Trending
         </button>

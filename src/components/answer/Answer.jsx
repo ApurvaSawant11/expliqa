@@ -123,7 +123,9 @@ const Answer = ({ answer, threadId }) => {
       ) : (
         <>
           {" "}
-          <p className="text-sm text-gray-600 pb-1">{answer.answerText}</p>
+          <p className="text-sm text-gray-600 pb-1 whitespace-pre-wrap">
+            {answer.answerText}
+          </p>
           {isInputOpen && (
             <div className="flex pb-1 flex-wrap gap-1 my-3">
               <input

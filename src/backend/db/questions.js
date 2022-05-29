@@ -9,7 +9,7 @@ export const questions = [
   {
     _id: uuid(),
     type: "question",
-    username: "adarshbalika@gmail.com",
+    username: "abbywen@gmail.com",
     questionTitle:
       "Why are cryptocurrency profits to be taxed at 30% in India?",
     questionContent: "I am Detailed Description about the Question.",
@@ -44,7 +44,7 @@ export const questions = [
         comments: [
           {
             _id: uuid(),
-            username: "adarshbalika@gmail.com",
+            username: "abbywen@gmail.com",
             commentData: "Thanks for the answer!",
           },
         ],
@@ -62,7 +62,7 @@ export const questions = [
     questionContent:
       "Our bodies use around 75 percent of our energy to digest the food. This means that we have only around 25 percent energy for other activities, including intellectual. I want to know how we can work at our best by consuming appropriate diet",
     votes: {
-      upvotedBy: ["adarshbalika@gmail.com"],
+      upvotedBy: ["abbywen@gmail.com"],
       downvotedBy: [],
     },
     bookmark: [],
@@ -110,7 +110,7 @@ export const questions = [
     questionContent:
       "I am looking for something that can be cooked within 25 minutes.",
     votes: {
-      upvotedBy: ["adarshbalika@gmail.com"],
+      upvotedBy: ["abbywen@gmail.com"],
       downvotedBy: [],
     },
     bookmark: [],

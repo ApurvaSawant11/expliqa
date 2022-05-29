@@ -22,4 +22,4 @@ const AnswerPage = () => {
   );
 };
 
-export { AnswerPage };
+export default AnswerPage;

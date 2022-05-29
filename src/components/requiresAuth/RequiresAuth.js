@@ -16,4 +16,4 @@ const RequiresAuth = () => {
   );
 };
 
-export { RequiresAuth };
+export default RequiresAuth;

@@ -19,7 +19,7 @@ export const posts = [
     },
     bookmark: [],
     tags: ["economy"],
-    username: "adarshbalika@gmail.com",
+    username: "abbywen@gmail.com",
     createdAt: "2021-05-23T10:38:12+05:30",
     updatedAt: formatDate(),
     comments: [
@@ -42,7 +42,7 @@ export const posts = [
     postContent:
       "“To get the most out of books should you read every book once, or read the best books 10x?”This is a question I often ask myself.\nWith so many books out there, what are the best books you should read to improve your life?\nI can tell you 10 books that have greatly improved my life.\nAnd, if you read them, I suspect they may improve your life as well.\n\n1. CAN’T HURT ME By David Goggins\n2. TUESDAYS WITH MORRIE By Mitch Albom\n3. ATOMIC HABITS By James Clear\n4. EGO IS THE ENEMY By Ryan Holiday",
     votes: {
-      upvotedBy: ["adarshbalika@gmail.com"],
+      upvotedBy: ["abbywen@gmail.com"],
       downvotedBy: [],
     },
     bookmark: [],
@@ -53,7 +53,7 @@ export const posts = [
     comments: [
       {
         _id: uuid(),
-        username: "adarshbalika@gmail.com",
+        username: "abbywen@gmail.com",
         commentData: "These are really great suggestions!",
         votes: {
           upvotedBy: [],

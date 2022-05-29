@@ -16,11 +16,11 @@ import {
 export const users = [
   {
     _id: uuid(),
-    firstName: "Adarsh",
-    lastName: "Balika",
-    username: "adarshbalika@gmail.com",
-    userHandle: "adarshbalika",
-    password: "adarshBalika123",
+    firstName: "Abby",
+    lastName: "Wen",
+    username: "abbywen@gmail.com",
+    userHandle: "abbywen",
+    password: "abbywen123",
     profilePic: balikaProfilePic,
     bio: "Works at neogcamp | Fixing hiring ",
     link: "https://github.com",

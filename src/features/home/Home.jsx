@@ -12,6 +12,7 @@ import { AnswerIcon, AskIcon, PostIcon } from "assets";
 import { useNavigate } from "react-router-dom";
 import { useDocumentTitle } from "hooks";
 import { closeLoader, openLoader } from "components/loader/loaderSlice.js";
+import { useInfiniteScroll } from "hooks";
 
 const Home = () => {
   useDocumentTitle("Home");
@@ -23,6 +24,11 @@ const Home = () => {
     dispatch(openLoader());
     setTimeout(() => dispatch(closeLoader()), 800);
   }, []);
+
+  const { pageNumber, lastElementRef, hasMorePosts, showLoader } =
+    useInfiniteScroll(feedPosts);
+
+  const feedPostsToDisplay = feedPosts.slice(0, pageNumber * 3);
 
   return (
     <main className="min-h-screen py-12 w-full xs:w-4/5 md:w-11/12 lg:w-4/5 xl:w-3/5 m-auto flex">
@@ -64,7 +70,7 @@ const Home = () => {
           <Loader />
         ) : (
           <section className="mt-7">
-            {feedPosts.map((thread) => {
+            {feedPostsToDisplay.map((thread) => {
               return (
                 <div className="mt-5" key={thread._id}>
                   {thread.type === "post" ? (
@@ -75,6 +81,15 @@ const Home = () => {
                 </div>
               );
             })}
+            <div key="last-element" ref={lastElementRef}>
+              {hasMorePosts && showLoader ? (
+                <Loader />
+              ) : (
+                <div className="p-7 text-center font-semibold text-gray-500">
+                  You have reached the end
+                </div>
+              )}
+            </div>
           </section>
         )}
       </div>
@@ -83,4 +98,4 @@ const Home = () => {
   );
 };
 
-export { Home };
+export default Home;
