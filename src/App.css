@@ -10,6 +10,10 @@
     width: min(90vw, 480px);
 }
 
+.userlist-wrapper {
+    width: min(90vw, 25rem);
+}
+
 .answer-container {
     width: min(90vw, 50rem);
 }

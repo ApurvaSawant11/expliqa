@@ -11,6 +11,7 @@ import {
   Loader,
   PostCard,
   QuestionCard,
+  UsersListModal,
 } from "components/index.js";
 import { FollowIcon, PostIcon, UnfollowIcon } from "assets";
 import { useScrollToTop } from "hooks/useScrollToTop.js";
@@ -34,6 +35,7 @@ const UserProfile = () => {
   const { loader } = useSelector((state) => state.loader);
   const [userAnswers, setUserAnswers] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showUsersList, setShowUsersList] = useState({ status: false });
 
   useDocumentTitle(
     `${
@@ -127,8 +129,30 @@ const UserProfile = () => {
               </div>
 
               <div className="flex text-gray-500 font-semibold gap-8 mb-2 ">
-                <span>{selectedUser.followers.length} Followers</span>
-                <span>{selectedUser.following.length} Following</span>
+                <span
+                  className="hover:underline cursor-pointer"
+                  onClick={() => {
+                    setShowUsersList({
+                      status: true,
+                      type: "followers",
+                      list: selectedUser.followers,
+                    });
+                  }}
+                >
+                  {selectedUser.followers.length} Followers
+                </span>
+                <span
+                  className="hover:underline cursor-pointer"
+                  onClick={() => {
+                    setShowUsersList({
+                      status: true,
+                      type: "following",
+                      list: selectedUser.following,
+                    });
+                  }}
+                >
+                  {selectedUser.following.length} Following
+                </span>
               </div>
               <div className="text-gray-500 text-sm font-semibold flex gap-4">
                 <div>
@@ -217,6 +241,12 @@ const UserProfile = () => {
 
       {showEditModal && (
         <EditProfileModal setShowEditModal={setShowEditModal} />
+      )}
+      {showUsersList.status && (
+        <UsersListModal
+          showUsersList={showUsersList}
+          setShowUsersList={setShowUsersList}
+        />
       )}
 
       <FollowBar />

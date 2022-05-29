@@ -22,6 +22,7 @@ import {
 } from "features/home/questionSlice";
 import { Answer, Comment } from "components";
 import { useDocumentTitle, useScrollToTop } from "hooks";
+import TextareaAutosize from "react-textarea-autosize";
 
 const SingleQuestion = () => {
   useScrollToTop();
@@ -232,7 +233,9 @@ const SingleQuestion = () => {
           className="h-8 rounded-full"
         />
         <div className="flex flex-wrap gap-2 xs:grow xs:flex-nowrap space-between items-center w-full rounded-md px-2 py-1">
-          <input
+          <TextareaAutosize
+            minRows={1}
+            maxRows={3}
             className="grow focus:outline-none py-1 px-2 rounded-md"
             placeholder={`Write your ${
               showComponent === "answer" ? "answer" : "comment"
