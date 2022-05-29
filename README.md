@@ -31,6 +31,9 @@ A forum app that allows you to share your views via posts and ask questions as w
 ---
 
 - Home page / User Feed
+- Infinite Scroll
+- Debounce search
+- Route based code splitting
 - Add Post with tags
 - Add, Edit or Delete comments on the Post
 - Add, Edit or Delete reply on post comments
